@@ -42,7 +42,7 @@ if (isset($_GET['error'])) {
             break;
 
         case 'taken':
-            $message = 'The email address provided is already registered.';
+            $message = 'The student code or email address provided is already registered.';
             break;
 
         case 'wrong':
