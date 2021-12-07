@@ -17,7 +17,7 @@
 
             if(!$stmt->execute(array($studentCode,$firstName,$lastName,$gender,$telephone,$course,$email,$hashedPassword,$createdDate))) {
                 $stmt = null;
-                header('location: ../index.php?error=stmtfailed');
+                header('location: ../includes/signup.inc.php?error=stmtfailed');
                 exit();
             }
 
@@ -29,18 +29,18 @@
 
             if(!$stmt->execute(array($studentCode, $email))) {
                 $stmt = null;
-                header('location: ../index.php?error=stmtfailed');
+                header('location: ../includes/signup.inc.php?error=stmtfailed');
                 exit();
             }
 
             $result = true;
-            if($stmt->rowCount() > 0) {
-                $resultCheck = true;
+            if($stmt->rowCount() !== 0) {
+                $result = true;
             } else {
-                $resultCheck = false;
+                $result = false;
             }
 
-            return $resultCheck;
+            return $result;
         }
     }
 ?>

@@ -10,15 +10,15 @@
 
         public function signinUser() {
             if($this->isEmpty()) {
-                header('location: ../index.php?error=inputs');
+                header('location: ../includes/signin.inc.php?error=inputs');
                 exit();
             }
             if($this->emailInvalid()) {
-                header('location: ../index.php?error=email');
+                header('location: ../includes/signin.inc.php?error=email');
                 exit();
             }
             if($this->passwordInvalid()) {
-                header('location: ../index.php?error=password');
+                header('location: ../includes/signin.inc.php?error=password');
                 exit();
             }
             $this->getUser($this->email, $this->password);
@@ -31,6 +31,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function emailInvalid() {
             $result = true;
@@ -39,6 +40,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function passwordInvalid() {
             $result = true;
@@ -47,6 +49,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
     }
 ?>

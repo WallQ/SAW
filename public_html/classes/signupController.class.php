@@ -26,47 +26,47 @@
 
         public function signupUser() {
             if($this->isEmpty()) {
-                header('location: ../index.php?error=inputs');
+                header('location: ../includes/signup.inc.php?error=inputs');
                 exit();
             }
             if($this->studentCodeInvalid()) {
-                header('location: ../index.php?error=studentcode');
+                header('location: ../includes/signup.inc.php?error=studentcode');
                 exit();
             }
             if($this->firstNameInvalid()) {
-                header('location: ../index.php?error=firstname');
+                header('location: ../includes/signup.inc.php?error=firstname');
                 exit();
             }
             if($this->lastNameInvalid()) {
-                header('location: ../index.php?error=lastname');
+                header('location: ../includes/signup.inc.php?error=lastname');
                 exit();
             }
             if($this->genderInvalid()) {
-                header('location: ../index.php?error=gender');
+                header('location: ../includes/signup.inc.php?error=gender');
                 exit();
             }
             if($this->telephoneInvalid()) {
-                header('location: ../index.php?error=telephone');
+                header('location: ../includes/signup.inc.php?error=telephone');
                 exit();
             }
             if($this->courseInvalid()) {
-                header('location: ../index.php?error=course');
+                header('location: ../includes/signup.inc.php?error=course');
                 exit();
             }
             if($this->emailInvalid()) {
-                header('location: ../index.php?error=email');
+                header('location: ../includes/signup.inc.php?error=email');
                 exit();
             }
             if($this->passwordInvalid()) {
-                header('location: ../index.php?error=password');
+                header('location: ../includes/signup.inc.php?error=password');
                 exit();
             }
             if($this->passwordMismatched()) {
-                header('location: ../index.php?error=match');
+                header('location: ../includes/signup.inc.php?error=match');
                 exit();
             }
             if($this->userTaken()) {
-                header('location: ../index.php?error=taken');
+                header('location: ../includes/signup.inc.php?error=taken');
                 exit();
             }
             $this->setUser(
@@ -83,7 +83,7 @@
         }
 
         private function isEmpty() {
-            $result = false;
+            $result = true;
             if(
                 empty($this->studentCode) ||
                 empty($this->firstName) ||
@@ -100,6 +100,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function studentCodeInvalid() {
             $result = true;
@@ -108,22 +109,25 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function firstNameInvalid() {
             $result = true;
-            if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{3,}/', $this->firstName)) {
+            if(!preg_match('/^[\p{L}]{3,}/ui', $this->firstName)) {
                 $result = true;
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function lastNameInvalid() {
             $result = true;
-            if(!preg_match('/^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{3,}/', $this->lastName)) {
+            if(!preg_match('/^[\p{L}]{3,}/ui', $this->lastName)) {
                 $result = true;
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function genderInvalid() {
             $result = true;
@@ -132,6 +136,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function telephoneInvalid() {
             $result = true;
@@ -140,6 +145,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function courseInvalid() {
             $result = true;
@@ -148,6 +154,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function emailInvalid() {
             $result = true;
@@ -156,6 +163,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function passwordInvalid() {
             $result = true;
@@ -164,6 +172,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function passwordMismatched() {
             $result = true;
@@ -172,6 +181,7 @@
             } else {
                 $result = false;
             }
+            return $result;
         }
         private function userTaken() {
             $result = true;
@@ -180,6 +190,6 @@
             } else {
                 $result = false;
             }
+            return $result;
         }   
     }
-?>

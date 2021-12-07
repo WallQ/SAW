@@ -16,7 +16,7 @@
             $this->charset = Config::read('db.charset');
 
             try {
-                $dsn =  'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->name.';charset='.$this->charset.';connect_timeout=15';
+                $dsn = 'mysql:host='.$this->host.';port='.$this->port.';dbname='.$this->name.';charset='.$this->charset.';connect_timeout=15';
                 $dbh = new PDO($dsn, $this->username, $this->password);
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $dbh;

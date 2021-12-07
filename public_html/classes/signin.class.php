@@ -5,13 +5,13 @@
 
             if(!$stmt->execute(array($email))) {
                 $stmt = null;
-                header('location: ../index.php?error=stmtfailed');
+                header('location: ../includes/signin.inc.php?error=stmtfailed');
                 exit();
             }
 
             if($stmt->rowCount() === 0) {
                 $stmt = null;
-                header('location: ../index.php?error=notfound');
+                header('location: ../includes/signin.inc.php?error=notfound');
                 exit();
             }
 
@@ -20,20 +20,20 @@
 
             if(!$comparePassword) {
                 $stmt = null;
-                header('location: ../index.php?error=wrong');
+                header('location: ../includes/signin.inc.php?error=wrong');
                 exit();
             } elseif($comparePassword) {
                 $stmt = $this->connect()->prepare('SELECT * FROM user WHERE user.email = ?;');
 
                 if(!$stmt->execute(array($email))) {
                     $stmt = null;
-                    header('location: ../index.php?error=stmtfailed');
+                    header('location: ../includes/signin.inc.php?error=stmtfailed');
                     exit();
                 }
 
                 if($stmt->rowCount() === 0) {
                     $stmt = null;
-                    header('location: ../index.php?error=notfound');
+                    header('location: ../includes/signin.inc.php?error=notfound');
                     exit();
                 }
 
