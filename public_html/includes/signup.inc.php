@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     <div class="container p-3">
         <h1 class="display-1 text-center">Sing Up</h1>
         <?php
-        include_once('./errorhandling.inc.php');
+        include_once('./error.inc.php');
         ?>
         <form method="POST" action="<?php $_SERVER["PHP_SELF"] ?>">
             <div class="form-group">
