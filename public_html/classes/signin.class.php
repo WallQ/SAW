@@ -43,6 +43,13 @@
                 $_SESSION['id'] = $user[0]['id'];
                 $_SESSION['studentCode'] = $user[0]['studentCode'];
                 $_SESSION['email'] = $user[0]['email'];
+                if(isset($_POST["remember"])) {
+                    setcookie ("email",$email,time()+ 1800);
+                    setcookie ("password",base64_encode($password),time()+ 1800);
+                } else {
+                    setcookie("email","");
+                    setcookie("password","");
+                }
             }
 
             $stmt = null;
