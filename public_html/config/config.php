@@ -3,7 +3,7 @@
     Config::write('db.port', '3306');
     Config::write('db.name', 'saw');
     Config::write('db.username', 'root');
-    Config::write('db.password', 'passwordSAW');
+    Config::write('db.password', '');
     Config::write('db.charset', 'utf8');
 
     class Config {
