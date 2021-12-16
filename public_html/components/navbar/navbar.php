@@ -1,20 +1,20 @@
 <header>
-    <nav class="p-3 bg-dark">
+    <nav class="p-3 color-emerald-900">
         <div class="container">
             <div class="d-flex flex-row justify-content-between align-items-center">
                 <div class="d-flex flex-column">
-                    <a href="/" class="text-white text-decoration-none">
-                        <i class="bi bi-bootstrap-fill" style="font-size: 24px"><span class="ms-3 h4 fst-normal text-uppercase">Simple header</span></i>
+                    <a href="/" class="text-white text-decoration-none logo">
+                        <i class="bi bi-bootstrap-fill"><span class="ms-3 h4 fst-normal text-uppercase">SAW</span></i>
                     </a>
                 </div>
                 <div class="d-flex flex-column">
                     <div class="dropdown hamburger">
-                        <button class="btn btn-outline-light border-0 " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn border-0 text-white shadow-none" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-list"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Sign In</a></li>
+                            <li><a class="dropdown-item" href="#">Sign Up</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </div>
@@ -22,8 +22,8 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row">
                         <div class="navBarController">
-                            <a href="#" class="btn btn-outline-light me-3">Sign In</a>
-                            <a href="#" class="btn btn-outline-light">Sign Up</a>
+                            <a href="#" class="btn btn-outline-emerald me-3 fw-bold"><i class="bi bi-person-fill me-2"></i>Sign In</a>
+                            <a href="#" class="btn btn-outline-emerald fw-bold"><i class="bi bi-person-plus-fill me-2"></i>Sign Up</a>
                         </div>
                     </div>
                 </div>

@@ -1,30 +1,30 @@
 <footer>
-    <div class="p-3 bg-dark">
+    <div class="p-3 color-emerald-900">
         <div class="container">
             <div class="d-flex flex-row justify-content-between align-items-center">
                 <div class="d-flex flex-column">
-                    <a href="/" class="text-white text-decoration-none">
-                        <i class="bi bi-bootstrap-fill" style="font-size: 24px"></i>
+                    <a href="/" class="text-white text-decoration-none logo">
+                        <i class="bi bi-bootstrap-fill"></i>
                     </a>
                 </div>
                 <div class="d-flex flex-column justify-content-center">
-                    <span class="text-muted">Copyright &copy; <script>
+                    <span class="text-white">Copyright &copy; <script>
                             document.write(new Date().getFullYear());
                         </script>, André & Sérgio</span>
                 </div>
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row">
-                        <a href="/" class="text-white text-decoration-none ps-1">
-                            <i class="bi bi-facebook" style="font-size: 24px"></i>
+                        <a href="/" class="text-white text-decoration-none ps-1 social social-fb">
+                            <i class="bi bi-facebook"></i>
                         </a>
-                        <a href="/" class="text-white text-decoration-none ps-1">
-                            <i class="bi bi-twitter" style="font-size: 24px"></i>
+                        <a href="/" class="text-white text-decoration-none ps-1 social social-tt">
+                            <i class="bi bi-twitter"></i>
                         </a>
-                        <a href="/" class="text-white text-decoration-none ps-1">
-                            <i class="bi bi-github" style="font-size: 24px"></i>
+                        <a href="/" class="text-white text-decoration-none ps-1 social social-gh">
+                            <i class="bi bi-github"></i>
                         </a>
-                        <a href="/" class="text-white text-decoration-none ps-1">
-                            <i class="bi bi-linkedin" style="font-size: 24px"></i>
+                        <a href="/" class="text-white text-decoration-none ps-1 social social-ld">
+                            <i class="bi bi-linkedin"></i>
                         </a>
                     </div>
                 </div>

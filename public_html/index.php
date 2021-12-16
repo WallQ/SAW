@@ -18,7 +18,7 @@ session_start();
 
 <body>
     <?php require_once('./components/navbar/navbar.php'); ?>
-    <div class="container-fluid bg-danger py-5">
+    <div class="container-fluid color-emerald-50 py-5">
         <div class="container">
             <form action="#" method="POST">
                 <label class="visually-hidden" for="searchbox">Username</label>
@@ -29,7 +29,7 @@ session_start();
             </form>
         </div>
     </div>
-    <div class="container-fluid bg-primary py-3">
+    <div class="container-fluid bg-body py-3">
         <div class="container">
             <h1 class="display-2 text-center pb-3">Categories</h1>
             <div class="row">
@@ -48,7 +48,7 @@ session_start();
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-success py-3">
+    <div class="container-fluid color-emerald-50 py-3">
         <div class="container">
             <div class="row">
                 <?php for ($i = 0; $i < 16; $i++) {
@@ -74,6 +74,29 @@ session_start();
                         </div>
                     </div>
                 <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-body py-3">
+        <div class="container">
+            <div class="row align-items-center py-3">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <h1 class="display-4 fw-bold lh-1 mb-3 text-capitalize">Newsletter</h1>
+                    <p class="col-lg-10 fs-4">Subscribe to receive email updates on new products announcements, promotions, sales and more...</p>
+                </div>
+                <div class="col-md-10 mx-auto col-lg-5">
+                    <form class="p-4 p-md-5 border rounded-3 bg-light">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingName" placeholder="Name">
+                            <label for="floatingName">Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+                            <label for="floatingEmail">Email</label>
+                        </div>
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Subscribe</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
