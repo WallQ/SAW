@@ -2,31 +2,36 @@
 
 function encryptData($data)
 {
-    $key = 'ww7LB8FP&]4Cmff>}j~YRG`t[Twx_z,cSe*wsQ]C(U2L<XchzdJp5Tbm8TgNVP9*nDvEJCDeqFEB#/^Z9<pY[eGc[m9F%BK,pf5}Stw>`?F~J~v(U#3@C<t}%^wBJ/{>@R-AhUJ.K*#tT}4t<b*rj>%";2$;9=>Mbk6x#c8NaNR5uWQh"}n*d5U8#ptu->Z25u/`5f%q;_s/<\@Y5%s-#stvK]Nkt#Ypg*jG#_d>R~J8t#Bd@WMm^R!_u~^<fD6C';
-    $cipher = "AES-128-CBC";
-    $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    $options = OPENSSL_RAW_DATA;
-    $ciphertext_raw = openssl_encrypt($data, $cipher, $key, $options, $iv);
-    $as_binary = true;
-    $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary);
-    $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
+    $key = Config::read('rp.secret');
+    $cipher = Config::read('rp.cipher');
+    $algorithm = Config::read('rp.algorithm');
 
-    return $ciphertext;
+    $ivLength = openssl_cipher_iv_length($cipher);
+    $iv = openssl_random_pseudo_bytes($ivLength);
+    $options = OPENSSL_RAW_DATA;
+    $cipherTextRaw = openssl_encrypt($data, $cipher, $key, $options, $iv);
+    $as_binary = true;
+    $hmac = hash_hmac($algorithm, $cipherTextRaw, $key, $as_binary);
+    $cipherText = base64_encode($iv . $hmac . $cipherTextRaw);
+
+    return $cipherText;
 }
 
 function decryptData($data)
 {
-    $key = 'ww7LB8FP&]4Cmff>}j~YRG`t[Twx_z,cSe*wsQ]C(U2L<XchzdJp5Tbm8TgNVP9*nDvEJCDeqFEB#/^Z9<pY[eGc[m9F%BK,pf5}Stw>`?F~J~v(U#3@C<t}%^wBJ/{>@R-AhUJ.K*#tT}4t<b*rj>%";2$;9=>Mbk6x#c8NaNR5uWQh"}n*d5U8#ptu->Z25u/`5f%q;_s/<\@Y5%s-#stvK]Nkt#Ypg*jG#_d>R~J8t#Bd@WMm^R!_u~^<fD6C';
-    $c = base64_decode($data);
-    $cipher = "AES-128-CBC";
-    $ivlen = openssl_cipher_iv_length($cipher);
-    $iv = substr($c, 0, $ivlen);
-    $sha2len = 32;
-    $hmac = substr($c, $ivlen, $sha2len);
-    $ciphertext_raw = substr($c, $ivlen + $sha2len);
+    $key = Config::read('rp.secret');
+    $cipher = Config::read('rp.cipher');
+    $algorithm = Config::read('rp.algorithm');
+
+    $cipherText = base64_decode($data);
+    $ivLength = openssl_cipher_iv_length($cipher);
+    $iv = substr($cipherText, 0, $ivLength);
+    $sha2Length = 32;
+    $hmac = substr($cipherText, $ivLength, $sha2Length);
+    $cipherTextRaw = substr($cipherText, $ivLength + $sha2Length);
     $options = OPENSSL_RAW_DATA;
-    $plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options, $iv);
-    $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
-    if (hash_equals($hmac, $calcmac))  return $plaintext;
+    $plainText = openssl_decrypt($cipherTextRaw, $cipher, $key, $options, $iv);
+    $as_binary = true;
+    $calcmac = hash_hmac($algorithm, $cipherTextRaw, $key, $as_binary);
+    if (hash_equals($hmac, $calcmac))  return $plainText;
 }

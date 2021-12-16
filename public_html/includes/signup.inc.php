@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     <input type="password" class="form-control" id="verify-password" name="verify-password" placeholder="Re-enter password" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}" autocomplete="new-password" required>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="submit" name="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit" name="submit" value="submit">Submit</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

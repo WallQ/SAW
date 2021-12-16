@@ -1,4 +1,5 @@
 <?php
+include_once '../configs/config.php';
 include_once './encrypt.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
@@ -10,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $cleanData = filter_var_array($data, $args);
     $cleanData += ['password' => $data['password']];
 
-    include_once '../config/config.php';
     include_once '../classes/dbh.class.php';
     include_once '../classes/signin.class.php';
     include_once '../classes/signinController.class.php';
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="submit" name="submit">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit" name="submit" value="submit">Submit</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

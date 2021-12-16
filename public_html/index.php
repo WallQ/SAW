@@ -5,58 +5,80 @@ session_start();
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="author" content="André Pinto & Sérgio Félix" />
+    <meta name="description" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/styles/main.css" />
+    <link rel="stylesheet" href="./assets/icons/bootstrap-icons.css" />
+    <link rel="stylesheet" href="./assets/styles/vendor/bootstrap.min.css" />
     <title>SAW</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="index.php">SAW</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="includes/signup.inc.php">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="includes/signin.inc.php">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="includes/signout.inc.php">Sign Out</a>
-                </li>
-            </ul>
+    <?php require_once('./components/navbar/navbar.php'); ?>
+    <div class="container-fluid bg-danger py-5">
+        <div class="container">
+            <form action="#" method="POST">
+                <label class="visually-hidden" for="searchbox">Username</label>
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control shadow-none border border-dark" id="searchbox" name="search" placeholder="Search...">
+                    <button type="submit" class="btn input-group-text shadow-none bg-white border border-dark" id="submit" name="submit" value="submit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
         </div>
-    </nav>
-    <div class="container">
-        <h1 class="display-1 text-center">Homepage</h1>
-        <?php
-        if (isset($_SESSION['email'])) {
-            echo ('
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        You are successfully authenticated!
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>');
-        } else {
-            echo ('
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        You aren\'t yet authenticated!
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>');
-        }
-        ?>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <div class="container-fluid bg-primary py-3">
+        <div class="container">
+            <h1 class="display-2 text-center pb-3">Categories</h1>
+            <div class="row">
+                <?php for ($i = 0; $i < 12; $i++) {
+                    //foreach ($products as $product) { 
+                ?>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="d-flex flex-column pb-4">
+                                <img src="./assets/images/products/car.jpg" class="rounded-circle rounded-circle-top" alt="..." width="100" height="100">
+                                <h5 class="text-center mt-2">Heading</h5>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bg-success py-3">
+        <div class="container">
+            <div class="row">
+                <?php for ($i = 0; $i < 16; $i++) {
+                    //foreach ($products as $product) { 
+                ?>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
+                        <div class="card card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
+                            <a href="#" class="text-decoration-none">
+                                <img src="./assets/images/products/car.jpg" class="card-img-top card-image-top" alt="...">
+                            </a>
+                            <div class="d-flex flex-column justify-content-between mt-3">
+                                <a href="#" class="text-body text-decoration-none">
+                                    <p class="card-title card-title-truncate h6">DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</p>
+                                </a>
+                                <div class="d-flex flex-column">
+                                    <small class="text-muted">Felgueiras - <?php echo date("j M", strtotime('2021-12-15 12:12:12')) ?></small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold">10$</span>
+                                        <i class="bi bi-heart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <?php require_once('./components/footer/footer.php'); ?>
+    <script src="./assets/scripts/vendor/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
