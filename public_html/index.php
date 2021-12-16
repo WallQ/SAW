@@ -29,10 +29,10 @@ session_start();
             </form>
         </div>
     </div>
-    <div class="container-fluid bg-body py-3">
+    <div class="container-fluid bg-body py-5">
         <div class="container">
-            <h1 class="display-4 fw-bold pb-3 text-capitalize text-center">Categories</h1>
-            <div class="row">
+            <h1 class="display-4 fw-bold text-capitalize text-center">Categories</h1>
+            <div class="row mt-5">
                 <?php for ($i = 0; $i < 12; $i++) {
                     //foreach ($products as $product) { 
                 ?>
@@ -48,7 +48,7 @@ session_start();
             </div>
         </div>
     </div>
-    <div class="container-fluid color-emerald-50 py-3">
+    <div class="container-fluid color-emerald-50 py-5">
         <div class="container">
             <div class="row">
                 <?php for ($i = 0; $i < 16; $i++) {
@@ -77,7 +77,7 @@ session_start();
             </div>
         </div>
     </div>
-    <div class="container-fluid bg-body py-3">
+    <div class="container-fluid bg-body py-5">
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -86,21 +86,23 @@ session_start();
                         <a class="pagination-bar shadow-none" href="#">1</a>
                         <a class="pagination-bar shadow-none" href="#">2</a>
                         <a class="pagination-bar shadow-none" href="#">3</a>
+                        <a class="pagination-bar shadow-none" href="#">4</a>
+                        <a class="pagination-bar shadow-none" href="#">5</a>
                         <a class="pagination-bar shadow-none" href="#">Next</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid color-emerald-50 py-3">
+    <div class="container-fluid color-emerald-50 py-5">
         <div class="container">
-            <div class="row align-items-center py-3">
+            <div class="row align-items-center">
                 <div class="col-lg-7 col-xl-7 col-xxl-7 text-center text-lg-start">
                     <h1 class="display-4 fw-bold text-capitalize">Newsletter</h1>
                     <p class="col-lg-10 fs-4">Subscribe to receive email updates on new products announcements, promotions, sales and more...</p>
                 </div>
                 <div class="col-10 col-sm-10 col-md-10 col-lg-5 col-xl-5 col-xxl-5 mx-auto">
-                    <form action="" method="post" class="p-4 border rounded-3 bg-body">
+                    <form action="#" method="post" class="p-4 border rounded-3 bg-body">
                         <div class="input-group input-group-lg mb-3">
                             <input type="text" class="form-control shadow-none border-emerald" id="floatingName" placeholder="Name" required>
                         </div>

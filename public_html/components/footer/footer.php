@@ -4,7 +4,7 @@
             <div class="d-flex flex-row justify-content-between align-items-center">
                 <div class="d-flex flex-column">
                     <a href="/" class="text-white text-decoration-none logo">
-                        <i class="bi bi-bootstrap-fill"></i>
+                        <i class="bi bi-tags-fill"></i>
                     </a>
                 </div>
                 <div class="d-flex flex-column justify-content-center">
