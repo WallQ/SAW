@@ -23,15 +23,15 @@ session_start();
             <form action="#" method="POST">
                 <label class="visually-hidden" for="searchbox">Username</label>
                 <div class="input-group input-group-lg">
-                    <input type="text" class="form-control shadow-none border border-dark" id="searchbox" name="search" placeholder="Search...">
-                    <button type="submit" class="btn input-group-text shadow-none bg-white border border-dark" id="submit" name="submit" value="submit"><i class="bi bi-search"></i></button>
+                    <input type="text" class="form-control shadow-none border-emerald" id="searchbox" name="search" placeholder="Search..." required>
+                    <button type="submit" class="btn shadow-none bg-white border-emerald" id="submit" name="submit" value="submit"><i class="bi bi-search"></i></button>
                 </div>
             </form>
         </div>
     </div>
     <div class="container-fluid bg-body py-3">
         <div class="container">
-            <h1 class="display-2 text-center pb-3">Categories</h1>
+            <h1 class="display-4 fw-bold pb-3 text-capitalize text-center">Categories</h1>
             <div class="row">
                 <?php for ($i = 0; $i < 12; $i++) {
                     //foreach ($products as $product) { 
@@ -79,22 +79,35 @@ session_start();
     </div>
     <div class="container-fluid bg-body py-3">
         <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="d-flex flex-row justify-content-center">
+                        <a class="pagination-bar shadow-none" href="#">Previous</a>
+                        <a class="pagination-bar shadow-none" href="#">1</a>
+                        <a class="pagination-bar shadow-none" href="#">2</a>
+                        <a class="pagination-bar shadow-none" href="#">3</a>
+                        <a class="pagination-bar shadow-none" href="#">Next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid color-emerald-50 py-3">
+        <div class="container">
             <div class="row align-items-center py-3">
-                <div class="col-lg-7 text-center text-lg-start">
-                    <h1 class="display-4 fw-bold lh-1 mb-3 text-capitalize">Newsletter</h1>
+                <div class="col-lg-7 col-xl-7 col-xxl-7 text-center text-lg-start">
+                    <h1 class="display-4 fw-bold text-capitalize">Newsletter</h1>
                     <p class="col-lg-10 fs-4">Subscribe to receive email updates on new products announcements, promotions, sales and more...</p>
                 </div>
-                <div class="col-md-10 mx-auto col-lg-5">
-                    <form class="p-4 p-md-5 border rounded-3 bg-light">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingName" placeholder="Name">
-                            <label for="floatingName">Name</label>
+                <div class="col-10 col-sm-10 col-md-10 col-lg-5 col-xl-5 col-xxl-5 mx-auto">
+                    <form action="" method="post" class="p-4 border rounded-3 bg-body">
+                        <div class="input-group input-group-lg mb-3">
+                            <input type="text" class="form-control shadow-none border-emerald" id="floatingName" placeholder="Name" required>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
-                            <label for="floatingEmail">Email</label>
+                        <div class="input-group input-group-lg mb-3">
+                            <input type="email" class="form-control shadow-none border-emerald" id="floatingEmail" placeholder="name@example.com" required>
                         </div>
-                        <button class="w-100 btn btn-lg btn-primary" type="submit">Subscribe</button>
+                        <button type="submit" class="w-100 btn btn-lg btn-emerald fw-bold shadow-none" id="submit" name="submit" value="submit">Subscribe</button>
                     </form>
                 </div>
             </div>
