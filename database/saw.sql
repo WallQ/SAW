@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Dez-2021 às 14:34
+-- Tempo de geração: 17-Dez-2021 às 15:24
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.12
 
@@ -24,10 +24,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categories`
+-- Estrutura da tabela `app_config`
 --
 
-CREATE TABLE `categories` (
+CREATE TABLE `app_config` (
+  `id` int(11) NOT NULL,
+  `config_id` varchar(144) NOT NULL,
+  `config_value` varchar(244) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `category`
+--
+
+CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `category` varchar(45) NOT NULL,
   `image` varchar(244) NOT NULL
@@ -49,10 +61,10 @@ CREATE TABLE `forgotpassword` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `logs`
+-- Estrutura da tabela `log`
 --
 
-CREATE TABLE `logs` (
+CREATE TABLE `log` (
   `id` int(11) NOT NULL,
   `type` varchar(144) NOT NULL,
   `message` longtext NOT NULL,
@@ -71,8 +83,8 @@ CREATE TABLE `product` (
   `price` double NOT NULL,
   `data` datetime NOT NULL,
   `description` longtext NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `categories_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -105,7 +117,7 @@ CREATE TABLE `user` (
   `email` varchar(144) NOT NULL,
   `password` varchar(256) NOT NULL,
   `level` enum('Admin','User') NOT NULL DEFAULT 'User',
-  `status` enum('Blocked','Allowed') NOT NULL,
+  `status` enum('Blocked','Allowed') NOT NULL DEFAULT 'Allowed',
   `createdDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -128,9 +140,15 @@ CREATE TABLE `userimage` (
 --
 
 --
--- Índices para tabela `categories`
+-- Índices para tabela `app_config`
 --
-ALTER TABLE `categories`
+ALTER TABLE `app_config`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `category`
+--
+ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -140,9 +158,9 @@ ALTER TABLE `forgotpassword`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `logs`
+-- Índices para tabela `log`
 --
-ALTER TABLE `logs`
+ALTER TABLE `log`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -150,15 +168,15 @@ ALTER TABLE `logs`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_product_user1_idx` (`user_id`),
-  ADD KEY `fk_product_categories1_idx` (`categories_id`);
+  ADD KEY `fk_product_category1_idx` (`category_id`),
+  ADD KEY `fk_product_user1_idx` (`user_id`);
 
 --
 -- Índices para tabela `productimage`
 --
 ALTER TABLE `productimage`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_productImages_product_idx` (`product_id`);
+  ADD KEY `fk_productImage_product1_idx` (`product_id`);
 
 --
 -- Índices para tabela `user`
@@ -178,9 +196,15 @@ ALTER TABLE `userimage`
 --
 
 --
--- AUTO_INCREMENT de tabela `categories`
+-- AUTO_INCREMENT de tabela `app_config`
 --
-ALTER TABLE `categories`
+ALTER TABLE `app_config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `category`
+--
+ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -190,9 +214,9 @@ ALTER TABLE `forgotpassword`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `logs`
+-- AUTO_INCREMENT de tabela `log`
 --
-ALTER TABLE `logs`
+ALTER TABLE `log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -227,14 +251,14 @@ ALTER TABLE `userimage`
 -- Limitadores para a tabela `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `fk_product_categories1` FOREIGN KEY (`categories_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_product_category1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_product_user1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `productimage`
 --
 ALTER TABLE `productimage`
-  ADD CONSTRAINT `fk_productImages_product` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_productImage_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `userimage`

@@ -41,7 +41,6 @@
 
 	<?php
 
-
 	include_once("template_parts/header.php");
 	include_once("template_parts/page_content.php");
 	include_once("template_parts/footer.php");

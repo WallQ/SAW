@@ -3,23 +3,21 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $data = array(
-        'studentCode' => $_POST['student-code'],
         'firstName' => $_POST['first-name'],
         'lastName' => $_POST['last-name'],
         'gender' => $_POST['gender'],
         'telephone' => $_POST['telephone'],
-        'course' => $_POST['course'],
+        'location' => $_POST['location'],
         'email' => $_POST['email'],
         'password' => $_POST['password'],
         'verifyPassword' => $_POST['verify-password']
     );
     $args = array(
-        'studentCode' => FILTER_SANITIZE_NUMBER_INT,
         'firstName' => FILTER_SANITIZE_STRING,
         'lastName' => FILTER_SANITIZE_STRING,
         'gender' => FILTER_SANITIZE_STRING,
         'telephone' => FILTER_SANITIZE_NUMBER_INT,
-        'course' => FILTER_SANITIZE_STRING,
+        'location' => FILTER_SANITIZE_STRING,
         'email' => FILTER_SANITIZE_EMAIL
     );
     $cleanData = filter_var_array($data, $args);
@@ -71,10 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         include_once('./error.inc.php');
         ?>
         <form method="POST" action="<?php $_SERVER["PHP_SELF"] ?>">
-            <div class="form-group">
-                <label for="student-code">Student code</label>
-                <input type="text" class="form-control" id="student-code" name="student-code" placeholder="Enter student code" minlength="7" maxlength="7" pattern="\d{7}" autocomplete="username" required>
-            </div>
             <div class="form-group form-row">
                 <div class="col">
                     <label for="first-name">First name</label>

@@ -1,12 +1,11 @@
 <?php
     class SignUp extends Dbh {
         protected function setUser(
-            $studentCode,
             $firstName,
             $lastName,
             $gender,
             $telephone,
-            $course,
+            $location,
             $email,
             $password,
             $createdDate
@@ -15,7 +14,7 @@
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
 
-            if(!$stmt->execute(array($studentCode,$firstName,$lastName,$gender,$telephone,$course,$email,$hashedPassword,$createdDate))) {
+            if(!$stmt->execute(array($firstName,$lastName,$gender,$telephone,$location,$email,$hashedPassword,$createdDate))) {
                 $stmt = null;
                 header('location: ../includes/signup.inc.php?error=stmtfailed');
                 exit();
@@ -24,10 +23,10 @@
             $stmt = null;
         }
 
-        protected function verifyUser($studentCode, $email) {
-            $stmt = $this->connect()->prepare('SELECT user.id FROM user WHERE user.studentCode = ? OR user.email = ? LIMIT 1;');
+        protected function verifyUser($email) {
+            $stmt = $this->connect()->prepare('SELECT user.id FROM user WHERE user.email = ? LIMIT 1;');
 
-            if(!$stmt->execute(array($studentCode, $email))) {
+            if(!$stmt->execute(array($email))) {
                 $stmt = null;
                 header('location: ../includes/signup.inc.php?error=stmtfailed');
                 exit();

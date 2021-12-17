@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `app_configs` (
-  `config_id` varchar(100) NOT NULL,
-  `config_value` varchar(250) NOT NULL
+  `config_id` varchar(144) NOT NULL,
+  `config_value` varchar(244) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -37,8 +37,7 @@ CREATE TABLE `app_configs` (
 --
 
 INSERT INTO `app_configs` (`config_id`, `config_value`) VALUES
-('APP_TITLE', 'Vendetudo® | A sua plataforma de classificados online',
- ;);
+('APP_TITLE', 'Vendetudo® | A sua plataforma de classificados online');
 
 -- --------------------------------------------------------
 
