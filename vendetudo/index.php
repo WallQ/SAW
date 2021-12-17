@@ -1,10 +1,10 @@
 <?php
 
 /* PHP.INI CONFIGS **/
-ini_set('display_errors', 1);
 error_reporting(E_ALL | E_STRICT);
-ini_set('error_log', 'Log/script_errors.log');
-ini_set('log_errors', 'On');
+ini_set('display_errors', 1);
+ini_set('log_errors', TRUE);
+ini_set('error_log', '../logs/error.log');
 ini_set('date.timezone', 'Europe/Lisbon');
 
 try {
