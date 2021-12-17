@@ -10,9 +10,10 @@ session_start();
     <meta name="description" content="" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./assets/styles/main.css" />
-    <link rel="stylesheet" href="./assets/icons/bootstrap-icons.css" />
-    <link rel="stylesheet" href="./assets/styles/vendor/bootstrap.min.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="./assets/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/icons/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/styles/vendor/bootstrap.min.css" />
     <title>SAW</title>
 </head>
 
@@ -38,10 +39,12 @@ session_start();
                 ?>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
                         <div class="d-flex flex-row justify-content-center">
-                            <div class="d-flex flex-column pb-4">
-                                <img src="./assets/images/products/car.jpg" class="rounded-circle rounded-circle-top" alt="..." width="100" height="100">
-                                <h5 class="text-center mt-2">Heading</h5>
-                            </div>
+                            <a href="#" class="text-link text-decoration-none">
+                                <div class="d-flex flex-column pb-4">
+                                    <img src="./assets/images/uploads/products/car.jpg" class="rounded-circle rounded-circle-top" alt="..." width="100" height="100">
+                                    <h5 class="text-center mt-2">Heading</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 <?php } ?>
@@ -57,7 +60,7 @@ session_start();
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
                         <div class="card card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
                             <a href="#" class="text-decoration-none">
-                                <img src="./assets/images/products/car.jpg" class="card-img-top card-image-top" alt="...">
+                                <img src="./assets/images/uploads/products/car.jpg" class="card-img-top card-image-top" alt="...">
                             </a>
                             <div class="d-flex flex-column justify-content-between mt-3">
                                 <a href="#" class="text-body text-decoration-none">

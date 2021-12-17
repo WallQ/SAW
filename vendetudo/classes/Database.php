@@ -20,34 +20,29 @@ class Database
 	///Prevent any object or instance of that class to be cloned
 	private function __clone()
 	{
-	} //Prevent any copy of this object
-
+	}
 	public function __construct($db_config)
 	{
-
 		$this->CONFIGS = $db_config;
 
-		$dsn = $db_config["driver"] . ':host=' . $db_config["server"] . ';port=' . $db_config["port"] . ';dbname=' . $db_config["database"] . ";charset=UTF8";
+		$dsn = 	$db_config["driver"] . ':host=' .
+			$db_config["server"] . ';port=' .
+			$db_config["port"] . ';dbname=' .
+			$db_config["database"] . ";charset=UTF8";
 		#$dsn = $db_config["driver"].':Server=' . $db_config["server"] .',' . $db_config["port"] . ';Database=' . $db_config["database"].",charset=UTF8";
 		#echo $dsn;
 		#new PDO("sqlsrv:Server=foo-sql,1433;Database=mydb", $user , $pass);
 
-
 		try {
-
 			$options = array(
 				PDO::ATTR_PERSISTENT => true,
 				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 				PDO::ATTR_EMULATE_PREPARES => false
 			);
-
 			$this->dbh = new PDO($dsn, $db_config["username"], $db_config["password"], $options);
 		} catch (Exception $e) {
 			$this->error = $e->getMessage();
-			#echo $this->error;
 			throw new Exception($this->error, 1);
-
-			//Colocar um throw!
 		}
 	}
 

@@ -8,15 +8,21 @@ ini_set('log_errors', 'On');
 ini_set('date.timezone', 'Europe/Lisbon');
 
 try {
-	// session_start inicia a sessão
 	session_start();
 
-	require_once("classes/autoload.php");
+	spl_autoload_register(function ($class_name) {
+		include_once($class_name . '.php');
+	});
 
-	//Load database configs
-	$db_configs = include_once("configs/db_config.php");
-
-	//Connect database		
+	$db_configs = array(
+		"driver" => "mysql",
+		"server" => "127.0.0.1",
+		"port" => "3306",
+		"database" => "vendetudo",
+		"username" => "root",
+		"password" => ""
+	);
+	
 	$db = Database::getInstance($db_configs);
 
 	$sql = "SELECT * FROM app_configs";
@@ -36,6 +42,7 @@ try {
 
 	$myApp = new App($app_configs);
 	$myApp->renderApplication();
+	
 } catch (Exception $e) {
 	echo "Internal error: " . $e->getMessage();
 }

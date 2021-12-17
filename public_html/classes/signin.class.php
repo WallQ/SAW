@@ -44,7 +44,6 @@
                 $_SESSION['studentCode'] = $user[0]['studentCode'];
                 $_SESSION['email'] = $user[0]['email'];
             }
-
             $stmt = null;
         }
     }

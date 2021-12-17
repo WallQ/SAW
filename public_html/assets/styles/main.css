@@ -73,6 +73,16 @@
 	color: var(--emerald-900);
 }
 
+.text-link {
+	color: var(--emerald-900);
+	cursor: pointer;
+}
+
+.text-link:hover {
+	color: var(--emerald-900);
+}
+
+
 .logo i {
 	font-size: 24px;
 }

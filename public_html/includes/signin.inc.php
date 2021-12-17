@@ -1,7 +1,6 @@
 <?php
 include_once '../configs/config.php';
 include_once './encrypt.inc.php';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $data = array(
         'email' => $_POST['email'],
@@ -17,12 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $signin = new SignInController($cleanData);
     $signin->signinUser();
 
-    if(isset($_POST["remember"])) {
-        setcookie ("email",encryptData($cleanData['email']),time()+ 1800);
-        setcookie ("password",encryptData($cleanData['password']),time()+ 1800);
+    if (isset($_POST["remember"])) {
+        setcookie("email", encryptData($cleanData['email']), time() + 1800);
+        setcookie("password", encryptData($cleanData['password']), time() + 1800);
     } else {
-        setcookie("email","");
-        setcookie("password","");
+        setcookie("email", "");
+        setcookie("password", "");
     }
     header('location: ../index.php?error=none');
 }
@@ -66,12 +65,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         <form method="POST" action="<?php $_SERVER["PHP_SELF"] ?>">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if(isset($_COOKIE['email'])) { echo decryptData($_COOKIE['email']); } ?>" required>
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if (isset($_COOKIE['email'])) {
+                                                                                                                                                    echo decryptData($_COOKIE['email']);
+                                                                                                                                                } ?>" required>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp" placeholder="Enter password" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}" autocomplete="current-password" value="<?php if(isset($_COOKIE['password'])) { echo decryptData($_COOKIE['password']); } ?>" required>
+                <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp" placeholder="Enter password" minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[a-zA-Z\d@$!%*?&]{8,}" autocomplete="current-password" value="<?php if (isset($_COOKIE['password'])) {
+                                                                                                                                                                                                                                                                                                echo decryptData($_COOKIE['password']);
+                                                                                                                                                                                                                                                                                            } ?>" required>
                 <small id="passwordHelp" class="form-text text-muted">Must be at least 8 characters and have at least 1 uppercase, 1 lowercase, 1 number and 1 symbol.</small>
             </div>
             <div class="form-group">

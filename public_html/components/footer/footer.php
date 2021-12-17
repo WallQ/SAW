@@ -14,16 +14,16 @@
                 </div>
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row">
-                        <a href="/" class="text-white text-decoration-none ps-1 social social-fb">
+                        <a href="https://www.facebook.com/" target="_blank" class="text-white text-decoration-none ps-1 social social-fb">
                             <i class="bi bi-facebook"></i>
                         </a>
-                        <a href="/" class="text-white text-decoration-none ps-1 social social-tt">
+                        <a href="https://twitter.com/" target="_blank" class="text-white text-decoration-none ps-1 social social-tt">
                             <i class="bi bi-twitter"></i>
                         </a>
-                        <a href="/" class="text-white text-decoration-none ps-1 social social-gh">
+                        <a href="https://github.com/" target="_blank" class="text-white text-decoration-none ps-1 social social-gh">
                             <i class="bi bi-github"></i>
                         </a>
-                        <a href="/" class="text-white text-decoration-none ps-1 social social-ld">
+                        <a href="https://www.linkedin.com/" target="_blank" class="text-white text-decoration-none ps-1 social social-ld">
                             <i class="bi bi-linkedin"></i>
                         </a>
                     </div>

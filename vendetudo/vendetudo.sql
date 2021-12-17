@@ -37,7 +37,8 @@ CREATE TABLE `app_configs` (
 --
 
 INSERT INTO `app_configs` (`config_id`, `config_value`) VALUES
-('APP_TITLE', 'Vendetudo® | A sua plataforma de classificados online');
+('APP_TITLE', 'Vendetudo® | A sua plataforma de classificados online',
+ ;);
 
 -- --------------------------------------------------------
 
