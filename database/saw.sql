@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Dez-2021 às 15:24
+-- Tempo de geração: 18-Dez-2021 às 00:05
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.12
 
@@ -20,18 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `saw`
 --
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `app_config`
---
-
-CREATE TABLE `app_config` (
-  `id` int(11) NOT NULL,
-  `config_id` varchar(144) NOT NULL,
-  `config_value` varchar(244) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -56,6 +44,17 @@ CREATE TABLE `forgotpassword` (
   `email` varchar(144) NOT NULL,
   `token` varchar(256) NOT NULL,
   `data` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `gender`
+--
+
+CREATE TABLE `gender` (
+  `id` int(11) NOT NULL,
+  `gender` enum('Masculine','Feminine','Other') NOT NULL DEFAULT 'Other'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -104,6 +103,17 @@ CREATE TABLE `productimage` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `state`
+--
+
+CREATE TABLE `state` (
+  `id` int(11) NOT NULL,
+  `state` varchar(144) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `user`
 --
 
@@ -111,14 +121,16 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `firstName` varchar(144) NOT NULL,
   `lastName` varchar(144) NOT NULL,
-  `gender` varchar(10) NOT NULL,
   `telephone` int(11) NOT NULL,
-  `location` varchar(144) NOT NULL,
+  `city` varchar(144) NOT NULL,
+  `zipCode` varchar(144) NOT NULL,
   `email` varchar(144) NOT NULL,
   `password` varchar(256) NOT NULL,
   `level` enum('Admin','User') NOT NULL DEFAULT 'User',
   `status` enum('Blocked','Allowed') NOT NULL DEFAULT 'Allowed',
-  `createdDate` datetime NOT NULL
+  `createdDate` datetime NOT NULL,
+  `state_id` int(11) NOT NULL,
+  `gender_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -140,12 +152,6 @@ CREATE TABLE `userimage` (
 --
 
 --
--- Índices para tabela `app_config`
---
-ALTER TABLE `app_config`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Índices para tabela `category`
 --
 ALTER TABLE `category`
@@ -155,6 +161,12 @@ ALTER TABLE `category`
 -- Índices para tabela `forgotpassword`
 --
 ALTER TABLE `forgotpassword`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `gender`
+--
+ALTER TABLE `gender`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -179,10 +191,18 @@ ALTER TABLE `productimage`
   ADD KEY `fk_productImage_product1_idx` (`product_id`);
 
 --
+-- Índices para tabela `state`
+--
+ALTER TABLE `state`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user_state1_idx` (`state_id`),
+  ADD KEY `fk_user_gender1_idx` (`gender_id`);
 
 --
 -- Índices para tabela `userimage`
@@ -196,12 +216,6 @@ ALTER TABLE `userimage`
 --
 
 --
--- AUTO_INCREMENT de tabela `app_config`
---
-ALTER TABLE `app_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `category`
 --
 ALTER TABLE `category`
@@ -211,6 +225,12 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT de tabela `forgotpassword`
 --
 ALTER TABLE `forgotpassword`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `gender`
+--
+ALTER TABLE `gender`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -229,6 +249,12 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT de tabela `productimage`
 --
 ALTER TABLE `productimage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `state`
+--
+ALTER TABLE `state`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -259,6 +285,13 @@ ALTER TABLE `product`
 --
 ALTER TABLE `productimage`
   ADD CONSTRAINT `fk_productImage_product1` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Limitadores para a tabela `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `fk_user_gender1` FOREIGN KEY (`gender_id`) REFERENCES `gender` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_user_state1` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limitadores para a tabela `userimage`

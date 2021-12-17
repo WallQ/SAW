@@ -1,5 +1,5 @@
 <footer>
-    <div class="p-3 color-emerald-900">
+    <div class="p-3 color-emerald-900 sticky-bottom">
         <div class="container">
             <div class="d-flex flex-row justify-content-between align-items-center">
                 <div class="d-flex flex-column">
