@@ -2,9 +2,9 @@
 
 function encryptData($data)
 {
-    $key = Config::read('rp.secret');
-    $cipher = Config::read('rp.cipher');
-    $algorithm = Config::read('rp.algorithm');
+    $key = 'YQUaTz9-4W4xyurv';
+    $cipher = 'AES-128-CBC';
+    $algorithm = 'sha256';
 
     $ivLength = openssl_cipher_iv_length($cipher);
     $iv = openssl_random_pseudo_bytes($ivLength);
@@ -19,9 +19,9 @@ function encryptData($data)
 
 function decryptData($data)
 {
-    $key = Config::read('rp.secret');
-    $cipher = Config::read('rp.cipher');
-    $algorithm = Config::read('rp.algorithm');
+    $key = 'YQUaTz9-4W4xyurv';
+    $cipher = 'AES-128-CBC';
+    $algorithm = 'sha256';
 
     $cipherText = base64_decode($data);
     $ivLength = openssl_cipher_iv_length($cipher);

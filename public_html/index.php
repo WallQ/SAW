@@ -1,125 +1,210 @@
 <?php
-session_start();
-?>
-<!DOCTYPE html>
-<html lang="en">
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 1);
+ini_set('log_errors', TRUE);
+ini_set('error_log', '../logs/errors.log');
+ini_set('date.timezone', 'Europe/Lisbon');
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="author" content="André Pinto & Sérgio Félix" />
-    <meta name="description" content="" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="./assets/styles/main.css" />
-    <link rel="stylesheet" type="text/css" href="./assets/icons/bootstrap-icons.css" />
-    <link rel="stylesheet" type="text/css" href="./assets/styles/vendor/bootstrap.min.css" />
-    <title>SAW</title>
-</head>
+try {
+    session_start();
 
-<body>
-    <?php require_once('./components/navbar/navbar.php'); ?>
-    <div class="container-fluid color-emerald-50 py-5">
-        <div class="container">
-            <form action="#" method="POST">
-                <label class="visually-hidden" for="searchbox">Username</label>
-                <div class="input-group input-group-lg">
-                    <input type="text" class="form-control shadow-none border-emerald" id="searchbox" name="search" placeholder="Search..." required>
-                    <button type="submit" class="btn shadow-none bg-white border-emerald" id="submit" name="submit" value="submit"><i class="bi bi-search"></i></button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="container-fluid bg-body py-5">
-        <div class="container">
-            <h1 class="display-4 fw-bold text-capitalize text-center">Categories</h1>
-            <div class="row mt-5">
-                <?php for ($i = 0; $i < 12; $i++) {
-                    //foreach ($products as $product) { 
-                ?>
-                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
-                        <div class="d-flex flex-row justify-content-center">
-                            <a href="#" class="text-link text-decoration-none">
-                                <div class="d-flex flex-column pb-4">
-                                    <img src="./assets/images/uploads/products/car.jpg" class="rounded-circle rounded-circle-top" alt="..." width="100" height="100">
-                                    <h5 class="text-center mt-2">Heading</h5>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid color-emerald-50 py-5">
-        <div class="container">
-            <div class="row">
-                <?php for ($i = 0; $i < 16; $i++) {
-                    //foreach ($products as $product) { 
-                ?>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
-                        <div class="card card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
-                            <a href="#" class="text-decoration-none">
-                                <img src="./assets/images/uploads/products/car.jpg" class="card-img-top card-image-top" alt="...">
-                            </a>
-                            <div class="d-flex flex-column justify-content-between mt-3">
-                                <a href="#" class="text-body text-decoration-none">
-                                    <p class="card-title card-title-truncate h6">DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</p>
-                                </a>
-                                <div class="d-flex flex-column">
-                                    <small class="text-muted">Felgueiras - <?php echo date("j M", strtotime('2021-12-15 12:12:12')) ?></small>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span class="fw-bold">10$</span>
-                                        <i class="bi bi-heart"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-body py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="d-flex flex-row justify-content-center">
-                        <a class="pagination-bar shadow-none" href="#">Previous</a>
-                        <a class="pagination-bar shadow-none" href="#">1</a>
-                        <a class="pagination-bar shadow-none" href="#">2</a>
-                        <a class="pagination-bar shadow-none" href="#">3</a>
-                        <a class="pagination-bar shadow-none" href="#">4</a>
-                        <a class="pagination-bar shadow-none" href="#">5</a>
-                        <a class="pagination-bar shadow-none" href="#">Next</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid color-emerald-50 py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7 col-xl-7 col-xxl-7 text-center text-lg-start">
-                    <h1 class="display-4 fw-bold text-capitalize">Newsletter</h1>
-                    <p class="col-lg-10 fs-4">Subscribe to receive email updates on new products announcements, promotions, sales and more...</p>
-                </div>
-                <div class="col-10 col-sm-10 col-md-10 col-lg-5 col-xl-5 col-xxl-5 mx-auto">
-                    <form action="#" method="post" class="p-4 border rounded-3 bg-body">
-                        <div class="input-group input-group-lg mb-3">
-                            <input type="text" class="form-control shadow-none border-emerald" id="floatingName" placeholder="Name" required>
-                        </div>
-                        <div class="input-group input-group-lg mb-3">
-                            <input type="email" class="form-control shadow-none border-emerald" id="floatingEmail" placeholder="name@example.com" required>
-                        </div>
-                        <button type="submit" class="w-100 btn btn-lg btn-emerald fw-bold shadow-none" id="submit" name="submit" value="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php require_once('./components/footer/footer.php'); ?>
-    <script src="./assets/scripts/vendor/bootstrap.bundle.min.js"></script>
-</body>
+    spl_autoload_register(function ($class_name) {
+        include_once($class_name . '.php');
+    });
 
-</html>
+    class Config
+    {
+        static $confArray;
+
+        public static function read()
+        {
+            return self::$confArray;
+        }
+
+        public static function write(array $configs)
+        {
+            self::$confArray = $configs;
+        }
+    }
+
+    $dbConfig = array(
+        'db.driver' => 'mysql',
+        'db.host' => '127.0.0.1',
+        'db.port' => '3306',
+        'db.name' => 'saw',
+        'db.username' => 'root',
+        'db.password' => 'passwordSAW',
+        'db.charset' => 'utf8'
+    );
+
+    print "<pre>";
+    print_r($dbConfig);
+    print "</pre>";
+
+    Config::write($dbConfig);
+
+    print "<pre>";
+    print_r(Config::read());
+    print "</pre>";
+
+    class Database
+    {
+        private $driver;
+        private $host;
+        private $port;
+        private $name;
+        private $username;
+        private $password;
+        private $charset;
+
+        private $configs;
+        private $options;
+        private $dbh;
+        private $error;
+        private $stmt;
+        private static $_instance = null;
+        private static $_backupInstance = null;
+
+        private function __clone()
+        {
+        }
+
+        public function __construct($config)
+        {
+            $this->driver = $config['db.driver'];
+            $this->host = $config['db.host'];
+            $this->port = $config['db.port'];
+            $this->name = $config['db.name'];
+            $this->username = $config['db.username'];
+            $this->password = $config['db.password'];
+            $this->charset = $config['db.charset'];
+            $this->configs = $config;
+
+            try {
+                $dsn =  $config['db.driver']
+                    . ':host=' . $config['db.host']
+                    . ';port=' . $config['db.port']
+                    . ';dbname=' . $config['db.name']
+                    . ';charset=' . $config['db.charset']
+                    . ';connect_timeout=15';
+                $this->options = $options = array(
+                    PDO::ATTR_PERSISTENT => true,
+                    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_EMULATE_PREPARES => false
+                );
+                $this->dbh = new PDO($dsn, $config['db.username'], $config['db.password'], $options);
+            } catch (PDOException $e) {
+                $this->error = $e->getMessage();
+                throw new Exception($e->getMessage(), 1);
+            }
+        }
+
+        public static function getInstance($config = null)
+        {
+            if (self::$_instance == null || $config != null) {
+                self::$_instance = new Database($config);
+            }
+            return self::$_instance;
+        }
+
+        public static function shadowInstance($new_db_conn_env = null)
+        {
+            self::$_backupInstance = self::$_instance;
+            if (self::$_instance == null || $new_db_conn_env != null) {
+                self::$_instance = new Database($new_db_conn_env);
+            }
+            return self::$_instance;
+        }
+
+        public static function restoreInstance()
+        {
+            self::$_instance = self::$_backupInstance;
+            return self::$_instance;
+        }
+
+        public function query($query)
+        {
+            if (!empty($this->error)) {
+                throw new Exception($this->error, 1);
+            } else {
+                $this->stmt = $this->dbh->prepare($query);
+            }
+        }
+
+        public function execute()
+        {
+            return $this->stmt->execute();
+        }
+
+        public function fetchAll()
+        {
+            $this->execute();
+            return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function fetch()
+        {
+            $this->execute();
+            return $this->stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function rowCount()
+        {
+            return $this->stmt->rowCount();
+        }
+    }
+
+    $db = Database::getInstance(Config::read());
+
+    print "<pre>";
+    print_r($db);
+    print "</pre>";
+
+    $sql = "SELECT * FROM app";
+    $db->query($sql);
+    $result = $db->fetchAll();
+    $appConfig = array();
+    foreach ($result as $config) {
+        $appConfig[$config['configId']] = $config['configValue'];
+    }
+    $urlParts = array();
+    if (isset($_GET["qs"])) {
+        $urlParts = explode("/", $_GET["qs"]);
+    }
+    define("APP_URL_PARTS", $urlParts);
+    define("HOME_URL_PREFIX", "/saw");
+
+    class App
+    {
+        private $CONFIGS = null;
+
+        private function __clone()
+        {
+        }
+
+        public function __construct($app_configs)
+        {
+            $this->CONFIGS = $app_configs;
+        }
+
+        public function startApp()
+        {
+            include_once('./components/Layout/layout.php');
+        }
+
+        public function getConfig($config_id)
+        {
+            if (isset($this->CONFIGS[$config_id])) {
+                return $this->CONFIGS[$config_id];
+            } else {
+                throw new Exception("CONFIG ID NOT EXISTS!");
+            }
+        }
+    }
+
+    $myApp = new App($appConfig);
+    $myApp->startApp();
+} catch (Exception $e) {
+    throw new Exception($e, 1);
+    print('Oops, something wen\'t wrong! ' . $e->getMessage());
+}
