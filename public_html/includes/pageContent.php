@@ -4,30 +4,30 @@ $menu = isset(APP_URL_PARTS[0]) ? APP_URL_PARTS[0] : null;
 
 switch ($menu) {
     case 'signup':
-        include_once('../pages/SingUp/signup.php');
+        include_once('./pages/SingUp/signup.php');
         break;
     case 'signin':
-        include_once('../pages/SingIn/signin.php');
+        include_once('./pages/SingIn/signin.php');
         break;
     case 'signout':
-        include_once('../pages/SignOut/signout.php');
+        include_once('./pages/SignOut/signout.php');
         break;
     case 'account':
-        include_once('../pages/Account/account.php');
+        include_once('./pages/Account/account.php');
         break;
     case 'myproducts':
-        include_once('../pages/MyProducts/myproducts.php');
+        include_once('./pages/MyProducts/myproducts.php');
         break;
     case 'sell':
-        include_once('../pages/Sell/sell.php');
+        include_once('./pages/Sell/sell.php');
         break;
     case 'product':
-        include_once('../pages/Product/product.php');
+        include_once('./pages/Product/product.php');
         break;
     case 'dashboard':
-        include_once('../pages/Dashboard');
+        include_once('./pages/Dashboard');
         break;
     default:
-        include_once('../pages/Homepage/homepage.php');
+        include_once('./pages/Homepage/homepage.php');
         break;
 }

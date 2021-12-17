@@ -21,8 +21,8 @@
                 <div class="d-flex flex-column">
                     <div class="d-flex flex-row">
                         <div class="navBarController">
-                            <a href="#" class="btn btn-outline-emerald fw-bold me-3"><i class="bi bi-person-fill me-2"></i>Sign In</a>
-                            <a href="#" class="btn btn-outline-emerald fw-bold"><i class="bi bi-person-plus-fill me-2"></i>Sign Up</a>
+                            <a href="#" class="btn btn-outline-emerald fw-bold shadow-none me-3"><i class="bi bi-person-fill me-2"></i>Sign In</a>
+                            <a href="#" class="btn btn-outline-emerald fw-bold shadow-none"><i class="bi bi-person-plus-fill me-2"></i>Sign Up</a>
                         </div>
                     </div>
                 </div>
