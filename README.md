@@ -1,7 +1,5 @@
 # SAW
 
-## MERN Stack
-
 -   [PHP](https://www.php.net/)
 -   [MySQL](https://www.mysql.com/)
 
