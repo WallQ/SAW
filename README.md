@@ -2,8 +2,8 @@
 
 ## MERN Stack
 
--   [PHP]
--   [MySQL]
+-   [PHP](https://www.php.net/)
+-   [MySQL](https://www.mysql.com/)
 
 This is an evaluation project for the unit SAW.
 
@@ -36,7 +36,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
-
-[php]: https://www.php.net/
-[mysql]: https://www.mysql.com/
+[MIT](https://github.com/WallQ/SAW/blob/master/LICENSE)
