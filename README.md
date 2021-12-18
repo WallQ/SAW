@@ -1,7 +1,7 @@
 # SAW - SEGURANÇA EM APLICAÇÕES WEB
 
-- [PHP](https://www.php.net/)
-- [MySQL](https://www.mysql.com/)
+-   [PHP](https://www.php.net/)
+-   [MySQL](https://www.mysql.com/)
 
 ## Getting Started
 
@@ -9,27 +9,31 @@ Install a web server such as [Apache](https://www.apache.org/), of course [PHP](
 
 ## Routes
 
-### Homepage 
-| Endpoint             | Request Fields                              | 
-| -------------------- | ------------------------------------------------ |
-| `GET /homepage` | { } |
-| `POST /homepage:search` | { word } | 
-| `POST /homepage` | { name, email } |
-| `GET /product:id` | { id } | 
+### Homepage
+
+| Endpoint                | Request Fields  |
+| ----------------------- | --------------- |
+| `GET /homepage`         | { }             |
+| `POST /homepage:search` | { word }        |
+| `POST /homepage`        | { name, email } |
+| `GET /product:id`       | { id }          |
 
 ### Authentication
-| Endpoint             |  Request Fields                              | 
-| -------------------- | ------------------------------------------------ |
-| `POST /signup` | { firstName, lastName, telephone, gender, state, zipCode, city, email, password, verifyPassword } | 
-| `POST /signin` | { email, password } | 
-| `GET /signout` | { } | 
+
+| Endpoint       | Request Fields                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------------- |
+| `POST /signup` | { firstName, lastName, telephone, gender, state, zipCode, city, email, password, verifyPassword } |
+| `POST /signin` | { email, password }                                                                               |
+| `GET /signout` | { }                                                                                               |
 
 ### User
-| Endpoint             |  Request Fields                              | 
-| -------------------- | ------------------------------------------------ |
-| `GET /account` | { } | 
-| `GET /myproducts` | { } | 
-| `POST /sell` | { name, price, description, category_id, user_id, [images] } | 
+
+| Endpoint          | Request Fields                                               |
+| ----------------- | ------------------------------------------------------------ |
+| `GET /account`    | { }                                                          |
+| `GET /myproducts` | { }                                                          |
+| `POST /sell`      | { name, price, description, category_id, user_id, [images] } |
 
 ## License
+
 [MIT](https://github.com/WallQ/SAW/blob/master/LICENSE)
