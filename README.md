@@ -1,5 +1,10 @@
 # SAW
 
+## MERN Stack
+
+-   [PHP]
+-   [MySQL]
+
 This is an evaluation project for the unit SAW.
 
 ## Installation
@@ -32,3 +37,6 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+
+[php]: https://www.php.net/
+[mysql]: https://www.mysql.com/
