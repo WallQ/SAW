@@ -1,37 +1,22 @@
-# SAW
+# SAW - SEGURANÇA EM APLICAÇÕES WEB
 
--   [PHP](https://www.php.net/)
--   [MySQL](https://www.mysql.com/)
+- [PHP](https://www.php.net/)
+- [MySQL](https://www.mysql.com/)
 
-This is an evaluation project for the unit SAW.
+## Getting Started
 
-## Installation
+Install a web server such as [Apache](https://www.apache.org/), of course [PHP](https://www.php.net/) and a database as well, such as [MySQL](https://www.mysql.com/).
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+## Routes
 
-```bash
-pip install foobar
-```
-
-## Usage
-
-```python
-import foobar
-
-# returns 'words'
-foobar.pluralize('word')
-
-# returns 'geese'
-foobar.pluralize('goose')
-
-# returns 'phenomenon'
-foobar.singularize('phenomena')
-```
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+| Endpoint             | Body Request Fields                              | Description          |
+| -------------------- | ------------------------------------------------ | -------------------- |
+| `GET /homepage`       | { } | Homepage    |
+| `POST /homepage?search` | { word: "" }                        | Search bar |
+| `POST /homepage` | { name: "", email: "" }                        | Newsletter |
+| `POST /signup`       | { } | Sign Up    |
+| `POST /signin` | { word: "" }                        | Sign In |
+| `POST /signout` | { name: "", email: "" }                        | Sign Out |
 
 ## License
 [MIT](https://github.com/WallQ/SAW/blob/master/LICENSE)
