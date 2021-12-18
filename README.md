@@ -15,6 +15,7 @@ Install a web server such as [Apache](https://www.apache.org/), of course [PHP](
 | `GET /homepage` | { } |
 | `POST /homepage:search` | { word } | 
 | `POST /homepage` | { name, email } |
+| `GET /product:id` | { id } | 
 
 ### Authentication
 | Endpoint             |  Request Fields                              | 
@@ -29,7 +30,6 @@ Install a web server such as [Apache](https://www.apache.org/), of course [PHP](
 | `GET /account` | { } | 
 | `GET /myproducts` | { } | 
 | `POST /sell` | { name, price, description, category_id, user_id, [images] } | 
-| `GET /product:id` | { id } | 
 
 ## License
 [MIT](https://github.com/WallQ/SAW/blob/master/LICENSE)
