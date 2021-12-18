@@ -9,14 +9,27 @@ Install a web server such as [Apache](https://www.apache.org/), of course [PHP](
 
 ## Routes
 
-| Endpoint             | Body Request Fields                              | Description          |
-| -------------------- | ------------------------------------------------ | -------------------- |
-| `GET /homepage`       | { } | Homepage    |
-| `POST /homepage?search` | { word: "" }                        | Search bar |
-| `POST /homepage` | { name: "", email: "" }                        | Newsletter |
-| `POST /signup`       | { } | Sign Up    |
-| `POST /signin` | { word: "" }                        | Sign In |
-| `POST /signout` | { name: "", email: "" }                        | Sign Out |
+### Homepage 
+| Endpoint             | Request Fields                              | 
+| -------------------- | ------------------------------------------------ |
+| `GET /homepage` | { } |
+| `POST /homepage:search` | { word } | 
+| `POST /homepage` | { name, email } |
+
+### Authentication
+| Endpoint             |  Request Fields                              | 
+| -------------------- | ------------------------------------------------ |
+| `POST /signup` | { firstName, lastName, telephone, gender, state, zipCode, city, email, password, verifyPassword } | 
+| `POST /signin` | { email, password } | 
+| `GET /signout` | { } | 
+
+### User
+| Endpoint             |  Request Fields                              | 
+| -------------------- | ------------------------------------------------ |
+| `GET /account` | { } | 
+| `GET /myproducts` | { } | 
+| `POST /sell` | { name, price, description, category_id, user_id, [images] } | 
+| `GET /product:id` | { id } | 
 
 ## License
 [MIT](https://github.com/WallQ/SAW/blob/master/LICENSE)
