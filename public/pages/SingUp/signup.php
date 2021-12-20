@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         <i class="bi bi-tags-fill"></i>
                         <h1 class="display-3 fw-normal">Sign In</h1>
                     </div>
-
                     <div class="col-md-6">
                         <div class="input-group input-group-lg mb-3">
                             <input type="text" class="form-control shadow-none border-emerald text-emerald-900" placeholder="First name" aria-label="First name" name="firstName" required>
@@ -56,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                             <input type="text" class="form-control shadow-none border-emerald" placeholder="Last name" aria-label="Last name" name="lastName" required>
                         </div>
                     </div>
-
                     <div class="col-md-6">
                         <div class="input-group input-group-lg mb-3">
                             <input type="tel" class="form-control shadow-none border-emerald" placeholder="Telephone" aria-label="Telephone" name="telephone" required>

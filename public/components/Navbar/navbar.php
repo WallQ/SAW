@@ -16,6 +16,8 @@
                             <?php
                             if (isset($_SESSION['logged'])) {
                             ?>
+                                <li><a class="dropdown-item" href="/account">Profile</a></li>
+                                <li><a class="dropdown-item" href="/sell">Sell</a></li>
                                 <li><a class="dropdown-item" href="/signout">Sign Out</a></li>
                             <?php } else { ?>
                                 <li><a class="dropdown-item" href="/signin">Sign In</a></li>
@@ -32,7 +34,9 @@
                             <?php
                             if (isset($_SESSION['logged'])) {
                             ?>
-                                <a href="/signout" class="btn btn-outline-emerald fw-bold shadow-none"><i class="bi bi-person-x-fill me-2"></i></i>Sign Out</a>
+                                <a href="/account" class="btn btn-outline-emerald fw-bold shadow-none me-3"><i class="bi bi-person-fill me-2"></i></i>Account</a>
+                                <a href="/sell" class="btn btn-outline-emerald fw-bold shadow-none me-3"><i class="bi bi-cart-fill me-2"></i>Sell</a>
+                                <a href="/signout" class="btn btn-outline-emerald fw-bold shadow-none"><i class="bi bi-person-x-fill me-2"></i>Sign Out</a>
                             <?php } else { ?>
                                 <a href="/signin" class="btn btn-outline-emerald fw-bold shadow-none me-3"><i class="bi bi-person-fill me-2"></i>Sign In</a>
                                 <a href="/signup" class="btn btn-outline-emerald fw-bold shadow-none"><i class="bi bi-person-plus-fill me-2"></i>Sign Up</a>

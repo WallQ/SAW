@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg" href="/assets/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/icons/bootstrap-icons.css" />
     <link rel="stylesheet" type="text/css" href="/assets/styles/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/icons/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
 </head>
 
 <body>
