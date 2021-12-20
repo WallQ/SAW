@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION['logged'])) {
-    header('location: ./signin');
+    header('location: ' . HOME_URL_PREFIX . '/signin');
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $data = array(

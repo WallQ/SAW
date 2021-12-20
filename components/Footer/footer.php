@@ -3,7 +3,7 @@
         <div class="container">
             <div class="d-flex flex-row justify-content-between align-items-center">
                 <div class="d-flex flex-column">
-                    <a href="/" class="text-white text-decoration-none logo">
+                    <a href="<?php echo HOME_URL_PREFIX;?>/" class="text-white text-decoration-none logo">
                         <i class="bi bi-tags-fill"></i>
                     </a>
                 </div>

@@ -8,10 +8,10 @@
     <meta name="description" content="This is an evaluation project for the unit SAW." />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg" href="/assets/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="/assets/styles/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/icons/bootstrap-icons.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/styles/main.css" />
+    <link rel="icon" type="image/svg" href="<?php echo HOME_URL_PREFIX;?>/assets/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/styles/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/icons/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/styles/main.css" />
 </head>
 
 <body>
@@ -20,7 +20,7 @@
     include_once('./includes/page.php');
     include_once('./components/Footer/footer.php');
     ?>
-    <script src="/assets/scripts/vendor/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo HOME_URL_PREFIX;?>/assets/scripts/vendor/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

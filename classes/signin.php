@@ -21,27 +21,27 @@ class SignIn extends Database
     public function signinUser()
     {
         if ($this->isEmpty()) {
-            header('location: ./signin?error=inputs');
+            header('location:' . HOME_URL_PREFIX . '/signin?error=inputs');
             exit();
         }
         if ($this->emailInvalid()) {
-            header('location: ./signin?error=email');
+            header('location:' . HOME_URL_PREFIX . '/signin?error=email');
             exit();
         }
         if ($this->passwordInvalid()) {
-            header('location: ./signin?error=password');
+            header('location:' . HOME_URL_PREFIX . '/signin?error=password');
             exit();
         }
         $stmt = $this->connect()->prepare('SELECT user.password FROM user WHERE user.email = ?;');
         if (!$stmt->execute(array($this->email))) {
             $stmt = null;
-            header('location: ./signin?error=stmtfailed');
+            header('location:' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
             exit();
         }
 
         if ($stmt->rowCount() === 0) {
             $stmt = null;
-            header('location: ./signin?error=notfound');
+            header('location:' . HOME_URL_PREFIX . '/signin?error=notfound');
             exit();
         }
 
@@ -50,20 +50,20 @@ class SignIn extends Database
 
         if (!$comparePassword) {
             $stmt = null;
-            header('location: ./signin?error=wrong');
+            header('location:' . HOME_URL_PREFIX . '/signin?error=wrong');
             exit();
         } elseif ($comparePassword) {
             $stmt = $this->connect()->prepare('SELECT * FROM user WHERE user.email = ?;');
 
             if (!$stmt->execute(array($this->email))) {
                 $stmt = null;
-                header('location: ./signin?error=stmtfailed');
+                header('location:' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
                 exit();
             }
 
             if ($stmt->rowCount() === 0) {
                 $stmt = null;
-                header('location: ./signin?error=notfound');
+                header('location:' . HOME_URL_PREFIX . '/signin?error=notfound');
                 exit();
             }
 

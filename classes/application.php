@@ -12,6 +12,7 @@ class Application
             $urlParts = explode('/', $_GET['url']);
         }
         define('APP_URL_PARTS', $urlParts);
+        define('HOME_URL_PREFIX', '/SAW');
     }
 
     public function startApp()

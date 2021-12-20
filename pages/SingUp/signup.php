@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['logged'])) {
-    header('location: ./homepage');
+    header('location: ' . HOME_URL_PREFIX . '/homepage');
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $data = array(
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 
     $signUp = new SignUp($cleanData);
     $signUp->signupUser();
-    header('location: ./signin');
+    header('location: ' . HOME_URL_PREFIX . '/signin');
 }
 ?>
 <div class="container-fluid bg-body py-5">

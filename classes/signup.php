@@ -29,58 +29,58 @@ class SignUp extends Database
     public function signupUser()
     {
         if ($this->isEmpty()) {
-            header('location: ./signup?error=inputs');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=inputs');
             exit();
         }
         if ($this->firstNameInvalid()) {
-            header('location: ./signup?error=firstname');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=firstname');
             exit();
         }
         if ($this->lastNameInvalid()) {
-            header('location: ./signup?error=lastname');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=lastname');
             exit();
         }
         if ($this->telephoneInvalid()) {
-            header('location: ./signup?error=telephone');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=telephone');
             exit();
         }
         if ($this->genderInvalid()) {
-            header('location: ./signup?error=gender');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=gender');
             exit();
         }
         if ($this->stateInvalid()) {
-            header('location: ./signup?error=state');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=state');
             exit();
         }
         if ($this->cityInvalid()) {
-            header('location: ./signup?error=city');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=city');
             exit();
         }
         if ($this->zipCodeInvalid()) {
-            header('location: ./signup?error=zipcode');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=zipcode');
             exit();
         }
         if ($this->emailInvalid()) {
-            header('location: ./signup?error=email');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=email');
             exit();
         }
         if ($this->passwordInvalid()) {
-            header('location: ./signup?error=password');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=password');
             exit();
         }
         if ($this->passwordMismatched()) {
-            header('location: ./signup?error=match');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=match');
             exit();
         }
         if ($this->userTaken()) {
-            header('location: ./signup?error=taken');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=taken');
             exit();
         }
         $stmt = $this->connect()->prepare('INSERT INTO user (firstName, lastName, telephone, city, zipCode, email, password, state_id, gender_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);');
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT, ['cost' => 12]);
         if (!$stmt->execute(array($this->firstName, $this->lastName, $this->telephone, $this->city, $this->zipCode, $this->email, $hashedPassword, $this->state, $this->gender))) {
             $stmt = null;
-            header('location: ./signup?error=stmtfailed');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=stmtfailed');
             exit();
         }
         $stmt = null;
@@ -200,7 +200,7 @@ class SignUp extends Database
         $stmt = $this->connect()->prepare('SELECT user.id FROM user WHERE user.email = ? LIMIT 1;');
         if (!$stmt->execute(array($this->email))) {
             $stmt = null;
-            header('location: ./signup?error=stmtfailed');
+            header('location: ' . HOME_URL_PREFIX . '/signup?error=stmtfailed');
             exit();
         }
         if ($stmt->rowCount() !== 0) {

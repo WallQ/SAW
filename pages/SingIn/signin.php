@@ -1,6 +1,6 @@
 <?php
 if (isset($_SESSION['logged'])) {
-    header('location: ./homepage');
+    header('location: ' . HOME_URL_PREFIX . '/homepage');
 }
 include_once('./includes/crypto.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         setcookie('email', '');
         setcookie('password', '');
     }
-    header('location: ./account');
+    header('location: ' . HOME_URL_PREFIX . '/account');
 }
 ?>
 <div class="container-fluid bg-body py-5">
