@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $data = array(
         'name' => $_POST['name'],
         'category' => $_POST['category'],
-        'images' => $_FILES['images'],
         'price' => $_POST['price'],
         'description' => $_POST['description']
     );
@@ -18,9 +17,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     );
     $cleanData = filter_var_array($data, $args);
 
-    $signUp = new SignUp($cleanData);
-    $signUp->signupUser();
-    header('location: ./signin');
+    // $extension = array('jpeg', 'jpg', 'png');
+    // foreach ($_FILES['images']['tmp_name'] as $key => $value) {
+    //     $fileName = $_FILES['images']['name'][$key];
+    //     $fileNameTemp = $_FILES['images']['tmp_name'][$key];
+    //     $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+    //     if (in_array($ext, $extension)) {
+    //         move_uploaded_file($fileNameTemp, './assets/images/uploads/products/' . $fileName);
+    //     }
+    // }
+
+    foreach ($_FILES['images']['tmp_name'] as $key => $value) {
+        $fileName = $_FILES['images']['name'][$key];
+        $fileType = $_FILES['images']['type'][$key];
+        $fileTemp = $_FILES['images']['tmp_name'][$key];
+        $data = file_get_contents($fileTemp);
+        //insert bd
+        print_r('<pre>');
+        print_r($fileName);
+        print_r('<br>');
+        print_r($fileType);
+        print_r('<br>');
+        print_r($fileTemp);
+        print_r('<br>');
+        print_r($data);
+        print_r('</pre>');
+    }
 }
 ?>
 <div class="container-fluid bg-body py-5">
@@ -28,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         <?php if (isset($_GET['error'])) {
             include_once('./includes/error.php');
         } ?>
-        <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST" class="row p-4 border rounded-3 bg-body">
+        <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST" enctype="multipart/form-data" class="row p-4 border rounded-3 bg-body">
             <div class="form-logo text-emerald-900 text-center mb-4">
                 <i class="bi bi-cart-fill"></i>
                 <h1 class="display-3 fw-normal">Sell</h1>
@@ -66,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </div>
             <div class="col-md-6">
                 <div class="input-group input-group-lg mb-3">
-                    <input class="form-control text-emerald-900 border-emerald shadow-none" type="file" aria-label="Images" name="images" multiple required>
+                    <input class="form-control text-emerald-900 border-emerald shadow-none" type="file" aria-label="Images" name="images[]" multiple required>
                 </div>
             </div>
             <div class="col-md-12">
