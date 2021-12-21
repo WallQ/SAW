@@ -6,43 +6,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $data = array(
         'name' => $_POST['name'],
         'category' => $_POST['category'],
+        'images' => $_FILES['images'],
         'price' => $_POST['price'],
-        'description' => $_POST['description']
+        'description' => $_POST['description'],
+        'user' => $_SESSION['id']
     );
     $args = array(
         'name' => FILTER_SANITIZE_STRING,
         'category' => FILTER_SANITIZE_NUMBER_INT,
         'price' => FILTER_SANITIZE_NUMBER_INT,
         'description' => FILTER_SANITIZE_STRING,
+        'user' => FILTER_SANITIZE_NUMBER_INT
     );
     $cleanData = filter_var_array($data, $args);
+    $cleanData += ['images' => $data['images']];
 
-    // $extension = array('jpeg', 'jpg', 'png');
-    // foreach ($_FILES['images']['tmp_name'] as $key => $value) {
-    //     $fileName = $_FILES['images']['name'][$key];
-    //     $fileNameTemp = $_FILES['images']['tmp_name'][$key];
-    //     $ext = pathinfo($fileName, PATHINFO_EXTENSION);
-    //     if (in_array($ext, $extension)) {
-    //         move_uploaded_file($fileNameTemp, './assets/images/uploads/products/' . $fileName);
-    //     }
-    // }
-
-    foreach ($_FILES['images']['tmp_name'] as $key => $value) {
-        $fileName = $_FILES['images']['name'][$key];
-        $fileType = $_FILES['images']['type'][$key];
-        $fileTemp = $_FILES['images']['tmp_name'][$key];
-        $data = file_get_contents($fileTemp);
-        //insert bd
-        print_r('<pre>');
-        print_r($fileName);
-        print_r('<br>');
-        print_r($fileType);
-        print_r('<br>');
-        print_r($fileTemp);
-        print_r('<br>');
-        print_r($data);
-        print_r('</pre>');
-    }
+    $sell = new Sell($cleanData);
+    $sell->sellProduct();
+    header('location: ' . HOME_URL_PREFIX . '/myproducts');
 }
 ?>
 <div class="container-fluid bg-body py-5">

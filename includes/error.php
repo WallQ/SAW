@@ -40,6 +40,21 @@ if (isset($_GET['error'])) {
         case 'wrong':
             $message = 'The email address or password provided are incorrect.';
             break;
+        case 'upload':
+            $message = 'The uploading failed.';
+            break;
+        case 'file':
+            $message = 'The file provided is not valid.';
+            break;
+        case 'type':
+            $message = 'The files type must be .jpeg or .jpg.';
+            break;
+        case 'size':
+            $message = 'The files must not be more than 2 MB.';
+            break;
+        case 'price':
+            $message = 'Please enter a valid price.';
+            break;
         case 'notfound':
             $message = 'The email address provided is not registered.';
             break;
