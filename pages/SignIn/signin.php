@@ -13,6 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     );
     $cleanData = filter_var_array($data, $args);
     $cleanData += ['password' => $data['password']];
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/signin?error');
+    }
 
     $signIn = new SignIn($cleanData);
     $signIn->signinUser();

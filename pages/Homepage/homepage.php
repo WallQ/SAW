@@ -1,7 +1,15 @@
 <?php
 $homepage = new Homepage();
 $categories = $homepage->getCategories();
-$products = $homepage->getProducts();
+if (isset($_GET['cat'])) {
+    $cleanData = filter_var($_GET['cat'], FILTER_SANITIZE_NUMBER_INT);
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/homepage?error');
+    }
+    $products = $homepage->getProductsByCategory($cleanData);
+} else {
+    $products = $homepage->getProducts();
+}
 ?>
 <?php if (isset($_GET['error'])) {
     include_once('./includes/error.php');
@@ -26,7 +34,7 @@ $products = $homepage->getProducts();
             ?>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
                         <div class="d-flex flex-row justify-content-center">
-                            <a href="<?php echo HOME_URL_PREFIX; ?>/cat?=<?php echo $category['id']; ?>" class="text-link text-decoration-none">
+                            <a href="<?php echo HOME_URL_PREFIX; ?>/homepage?cat=<?php echo $category['id']; ?>" class="text-link text-decoration-none">
                                 <div class="d-flex flex-column pb-4">
                                     <img src="./assets/images/categories/<?php echo $category['fileName']; ?>" class="rounded-circle rounded-circle-top color-emerald-100" alt="<?php echo $category['category']; ?>" width="100" height="100" loading="lazy">
                                     <h5 class="text-center mt-2"><?php echo $category['category']; ?></h5>
@@ -34,8 +42,15 @@ $products = $homepage->getProducts();
                             </a>
                         </div>
                     </div>
-            <?php
+                <?php
                 }
+            } else { ?>
+                <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
+                    <div class="d-flex flex-row justify-content-center">
+                        <h1 class="display-4 fw-bold text-capitalize text-center text-emerald-900">Categories</h1>
+                    </div>
+                </div>
+            <?php
             }
             ?>
         </div>
@@ -43,7 +58,8 @@ $products = $homepage->getProducts();
 </div>
 <div class="container-fluid color-emerald-50 py-5">
     <div class="container">
-        <div class="row">
+        <h1 class="display-4 fw-bold text-capitalize text-center text-emerald-900">Products</h1>
+        <div class="row mt-5">
             <?php
             if (isset($products)) {
                 foreach ($products as $product) {
@@ -67,9 +83,13 @@ $products = $homepage->getProducts();
                             </div>
                         </div>
                     </div>
-            <?php
+                <?php
                 }
-            }
+            } else { ?>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                    <h1 class="display-6 text-capitalize text-center text-emerald-900">There is currently no products in this category.</h1>
+                </div>
+            <?php }
             ?>
         </div>
     </div>

@@ -38,4 +38,21 @@ class Homepage extends Database
         $stmt = null;
         return $result;
     }
+
+    public function getProductsByCategory($categoryId)
+    {
+        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.data, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id WHERE p.category_id = ?;');
+        if (!$stmt->execute(array($categoryId))) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
+            exit();
+        }
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetchAll();
+        } else {
+            $result = NULL;
+        }
+        $stmt = null;
+        return $result;
+    }
 }

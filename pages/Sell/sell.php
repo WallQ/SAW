@@ -20,6 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     );
     $cleanData = filter_var_array($data, $args);
     $cleanData += ['images' => $data['images']];
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/sell?error');
+    }
 
     $sell = new Sell($cleanData);
     $sell->sellProduct();

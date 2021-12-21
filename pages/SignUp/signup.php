@@ -27,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     );
     $cleanData = filter_var_array($data, $args);
     $cleanData += ['password' => $data['password'], 'verifyPassword' => $data['verifyPassword']];
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/signup?error');
+    }
 
     $signUp = new SignUp($cleanData);
     $signUp->signupUser();
