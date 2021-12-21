@@ -2,6 +2,10 @@
 if (isset($_SESSION['logged'])) {
     header('location: ' . HOME_URL_PREFIX . '/homepage');
 }
+$gender = new Gender();
+$genders = $gender->getGenders();
+$state = new State();
+$states = $state->getStates();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $data = array(
         'firstName' => $_POST['firstName'],
@@ -65,37 +69,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-lg mb-3">
-                            <select class="form-select shadow-none border-emerald" aria-label="Gender" name="gender" required>
-                                <option value="1">Masculine</option>
-                                <option value="2">Feminine</option>
-                                <option value="3">Other</option>
-                            </select>
+                            <?php
+                            if (isset($genders)) { ?>
+                                <select class="form-select shadow-none border-emerald" aria-label="Gender" name="gender" required>
+                                    <?php
+                                    foreach ($genders as $gender) { ?>
+                                        <option value="<?php echo $gender['id']; ?>"><?php echo $gender['gender']; ?></option>
+                                    <?php
+                                    } ?>
+                                </select>
+                            <?php
+                            } ?>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-lg mb-3">
-                            <select class="form-select shadow-none border-emerald" aria-label="State" name="state" required>
-                                <option value="1">Lisboa</option>
-                                <option value="2">Porto</option>
-                                <option value="3">Setúbal</option>
-                                <option value="4">Braga</option>
-                                <option value="5">Aveiro</option>
-                                <option value="6">Faro</option>
-                                <option value="7">Leiria</option>
-                                <option value="8">Santarém</option>
-                                <option value="9">Coimbra</option>
-                                <option value="10">Viseu</option>
-                                <option value="11">Madeira</option>
-                                <option value="12">Açores</option>
-                                <option value="13">Viana do Castelo</option>
-                                <option value="14">Vila Real</option>
-                                <option value="15">Castelo Branco</option>
-                                <option value="16">Évora</option>
-                                <option value="17">Beja</option>
-                                <option value="18">Guarda</option>
-                                <option value="19">Bragança</option>
-                                <option value="20">Portalegre</option>
-                            </select>
+                            <?php
+                            if (isset($states)) { ?>
+                                <select class="form-select shadow-none border-emerald" aria-label="State" name="state" required>
+                                    <?php
+                                    foreach ($states as $state) { ?>
+                                        <option value="<?php echo $state['id']; ?>"><?php echo $state['state']; ?></option>
+                                    <?php
+                                    } ?>
+                                </select>
+                            <?php
+                            } ?>
                         </div>
                     </div>
                     <div class="col-md-6">

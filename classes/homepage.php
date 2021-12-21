@@ -5,10 +5,10 @@ class Homepage extends Database
     {
     }
 
-    public function getCategories()
+    public function getProducts($resultsPerPage, $firstElement)
     {
-        $stmt = $this->connect()->prepare('SELECT * FROM category;');
-        if (!$stmt->execute()) {
+        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.data, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id ORDER BY p.data DESC LIMIT ?,?;');
+        if (!$stmt->execute(array($firstElement, $resultsPerPage))) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
             exit();
@@ -22,10 +22,10 @@ class Homepage extends Database
         return $result;
     }
 
-    public function getProducts()
+    public function getProductsByCategory($categoryId, $resultsPerPage, $firstElement)
     {
-        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.data, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id;');
-        if (!$stmt->execute()) {
+        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.data, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id WHERE p.category_id = ? ORDER BY p.data DESC LIMIT ?,?;');
+        if (!$stmt->execute(array($categoryId, $firstElement, $resultsPerPage))) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
             exit();
@@ -39,19 +39,15 @@ class Homepage extends Database
         return $result;
     }
 
-    public function getProductsByCategory($categoryId)
+    public function getNumberOfProducts()
     {
-        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.data, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id WHERE p.category_id = ?;');
-        if (!$stmt->execute(array($categoryId))) {
+        $stmt = $this->connect()->prepare('SELECT * FROM product;');
+        if (!$stmt->execute()) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
             exit();
         }
-        if ($stmt->rowCount() > 0) {
-            $result = $stmt->fetchAll();
-        } else {
-            $result = NULL;
-        }
+        $result = $stmt->rowCount();
         $stmt = null;
         return $result;
     }

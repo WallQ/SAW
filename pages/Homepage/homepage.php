@@ -1,14 +1,28 @@
 <?php
 $homepage = new Homepage();
-$categories = $homepage->getCategories();
+$category = new Category();
+$categories = $category->getCategories();
+if (isset($_GET['pag'])) {
+    $cleanData = filter_var($_GET['pag'], FILTER_SANITIZE_NUMBER_INT);
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/homepage?error');
+    }
+    $page = $_GET['pag'];
+} else {
+    $page = 1;
+}
+$resultsPerPage = 6;
+$firstElement = ($page - 1) * $resultsPerPage;
+$numberOfProducts = $homepage->getNumberOfProducts();
+$numberOfPages = ceil($numberOfProducts / $resultsPerPage);
 if (isset($_GET['cat'])) {
     $cleanData = filter_var($_GET['cat'], FILTER_SANITIZE_NUMBER_INT);
     if (!$cleanData) {
         header('location: ' . HOME_URL_PREFIX . '/homepage?error');
     }
-    $products = $homepage->getProductsByCategory($cleanData);
+    $products = $homepage->getProductsByCategory($cleanData, $resultsPerPage, $firstElement);
 } else {
-    $products = $homepage->getProducts();
+    $products = $homepage->getProducts($resultsPerPage, $firstElement);
 }
 ?>
 <?php if (isset($_GET['error'])) {
@@ -30,8 +44,7 @@ if (isset($_GET['cat'])) {
         <div class="row mt-5">
             <?php
             if (isset($categories)) {
-                foreach ($categories as $category) {
-            ?>
+                foreach ($categories as $category) { ?>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
                         <div class="d-flex flex-row justify-content-center">
                             <a href="<?php echo HOME_URL_PREFIX; ?>/homepage?cat=<?php echo $category['id']; ?>" class="text-link text-decoration-none">
@@ -51,8 +64,7 @@ if (isset($_GET['cat'])) {
                     </div>
                 </div>
             <?php
-            }
-            ?>
+            } ?>
         </div>
     </div>
 </div>
@@ -62,15 +74,14 @@ if (isset($_GET['cat'])) {
         <div class="row mt-5">
             <?php
             if (isset($products)) {
-                foreach ($products as $product) {
-            ?>
+                foreach ($products as $product) { ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
                         <div class="card card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
-                            <a href="<?php echo HOME_URL_PREFIX; ?>/product/id?=<?php echo $product['id']; ?>" class="text-decoration-none">
+                            <a href="<?php echo HOME_URL_PREFIX; ?>/product?id=<?php echo $product['id']; ?>" class="text-decoration-none">
                                 <img src="./assets/images/uploads/products/<?php echo $product['fileName']; ?>" class="card-img-top card-image-top" alt="<?php echo $product['name']; ?>" width="200" height="200" loading="lazy">
                             </a>
                             <div class="d-flex flex-column justify-content-between mt-3">
-                                <a href="<?php echo HOME_URL_PREFIX; ?>/product/id?=<?php echo $product['id']; ?>" class="text-body text-decoration-none">
+                                <a href="<?php echo HOME_URL_PREFIX; ?>/product?id=<?php echo $product['id']; ?>" class="text-body text-decoration-none">
                                     <p class="card-title card-title-truncate h6 text-emerald-900"><?php echo $product['name']; ?></p>
                                 </a>
                                 <div class="d-flex flex-column">
@@ -89,7 +100,8 @@ if (isset($_GET['cat'])) {
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
                     <h1 class="display-6 text-capitalize text-center text-emerald-900">There is currently no products in this category.</h1>
                 </div>
-            <?php }
+            <?php
+            }
             ?>
         </div>
     </div>
@@ -99,13 +111,13 @@ if (isset($_GET['cat'])) {
         <div class="row">
             <div class="col">
                 <div class="d-flex flex-row justify-content-center">
-                    <a class="pagination-bar shadow-none" href="#">Previous</a>
-                    <a class="pagination-bar shadow-none" href="#">1</a>
-                    <a class="pagination-bar shadow-none" href="#">2</a>
-                    <a class="pagination-bar shadow-none" href="#">3</a>
-                    <a class="pagination-bar shadow-none" href="#">4</a>
-                    <a class="pagination-bar shadow-none" href="#">5</a>
-                    <a class="pagination-bar shadow-none" href="#">Next</a>
+                    <?php
+                    if (isset($products) && !isset($_GET['cat'])) {
+                        for ($page = 1; $page <= $numberOfPages; $page++) { ?>
+                            <a class="pagination-bar shadow-none" href="<?php echo HOME_URL_PREFIX; ?>/homepage?pag=<?php echo $page; ?>"><?php echo $page; ?></a>
+                    <?php
+                        }
+                    } ?>
                 </div>
             </div>
         </div>
@@ -119,7 +131,7 @@ if (isset($_GET['cat'])) {
                 <p class="col-lg-10 fs-4 text-emerald-900">Subscribe to receive email updates on new products announcements, promotions, sales and more...</p>
             </div>
             <div class="col-10 col-sm-10 col-md-10 col-lg-5 col-xl-5 col-xxl-5 mx-auto">
-                <form action="#" method="post" class="p-4 border rounded-3 bg-body">
+                <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST" class="p-4 border rounded-3 bg-body">
                     <div class="input-group input-group-lg mb-3">
                         <input type="text" class="form-control shadow-none border-emerald" placeholder="Name" name="name" required>
                     </div>
