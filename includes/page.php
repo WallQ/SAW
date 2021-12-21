@@ -4,10 +4,10 @@ $page = isset(APP_URL_PARTS[0]) ? APP_URL_PARTS[0] : null;
 
 switch ($page) {
     case 'signup':
-        include_once('./pages/SingUp/signup.php');
+        include_once('./pages/SignUp/signup.php');
         break;
     case 'signin':
-        include_once('./pages/SingIn/signin.php');
+        include_once('./pages/SignIn/signin.php');
         break;
     case 'signout':
         include_once('./pages/SignOut/signout.php');

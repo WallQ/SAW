@@ -1,3 +1,11 @@
+<?php
+$homepage = new Homepage();
+$categories = $homepage->getCategories();
+$products = $homepage->getProducts();
+?>
+<?php if (isset($_GET['error'])) {
+    include_once('./includes/error.php');
+} ?>
 <div class="container-fluid color-emerald-50 py-5">
     <div class="container">
         <form action="#" method="POST">
@@ -12,49 +20,57 @@
     <div class="container">
         <h1 class="display-4 fw-bold text-capitalize text-center text-emerald-900">Categories</h1>
         <div class="row mt-5">
-            <?php for ($i = 0; $i < 12; $i++) {
-                //foreach ($products as $product) { 
+            <?php
+            if (isset($categories)) {
+                foreach ($categories as $category) {
             ?>
-                <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
-                    <div class="d-flex flex-row justify-content-center">
-                        <a href="#" class="text-link text-decoration-none">
-                            <div class="d-flex flex-column pb-4">
-                                <img src="./assets/images/uploads/products/car.jpg" class="rounded-circle rounded-circle-top" alt="..." width="100" height="100" loading="lazy">
-                                <h5 class="text-center mt-2">Heading</h5>
-                            </div>
-                        </a>
+                    <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
+                        <div class="d-flex flex-row justify-content-center">
+                            <a href="<?php echo HOME_URL_PREFIX; ?>/cat?=<?php echo $category['id']; ?>" class="text-link text-decoration-none">
+                                <div class="d-flex flex-column pb-4">
+                                    <img src="./assets/images/categories/<?php echo $category['fileName']; ?>" class="rounded-circle rounded-circle-top color-emerald-100" alt="<?php echo $category['category']; ?>" width="100" height="100" loading="lazy">
+                                    <h5 class="text-center mt-2"><?php echo $category['category']; ?></h5>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            <?php } ?>
+            <?php
+                }
+            }
+            ?>
         </div>
     </div>
 </div>
 <div class="container-fluid color-emerald-50 py-5">
     <div class="container">
         <div class="row">
-            <?php for ($i = 0; $i < 16; $i++) {
-                //foreach ($products as $product) { 
+            <?php
+            if (isset($products)) {
+                foreach ($products as $product) {
             ?>
-                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
-                    <div class="card card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
-                        <a href="#" class="text-decoration-none">
-                            <img src="./assets/images/uploads/products/car.jpg" class="card-img-top card-image-top" alt="..." loading="lazy">
-                        </a>
-                        <div class="d-flex flex-column justify-content-between mt-3">
-                            <a href="#" class="text-body text-decoration-none">
-                                <p class="card-title card-title-truncate h6 text-emerald-900">DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD</p>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
+                        <div class="card card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
+                            <a href="<?php echo HOME_URL_PREFIX; ?>/product/id?=<?php echo $product['id']; ?>" class="text-decoration-none">
+                                <img src="./assets/images/uploads/products/<?php echo $product['fileName']; ?>" class="card-img-top card-image-top" alt="<?php echo $product['name']; ?>" width="200" height="200" loading="lazy">
                             </a>
-                            <div class="d-flex flex-column">
-                                <small class="text-muted">Felgueiras - <?php echo date("j M", strtotime('2021-12-15 12:12:12')) ?></small>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="fw-bold text-emerald-900">10$</span>
-                                    <i class="bi bi-heart text-emerald-900"></i>
+                            <div class="d-flex flex-column justify-content-between mt-3">
+                                <a href="<?php echo HOME_URL_PREFIX; ?>/product/id?=<?php echo $product['id']; ?>" class="text-body text-decoration-none">
+                                    <p class="card-title card-title-truncate h6 text-emerald-900"><?php echo $product['name']; ?></p>
+                                </a>
+                                <div class="d-flex flex-column">
+                                    <small class="text-muted"><?php echo $product['city']; ?> - <?php echo date("j M", strtotime($product['data'])); ?></small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-bold text-emerald-900"><?php echo number_format($product['price'], 2, '.'); ?>$</span>
+                                        <i class="bi bi-heart text-emerald-900"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php } ?>
+            <?php
+                }
+            }
+            ?>
         </div>
     </div>
 </div>
