@@ -35,7 +35,7 @@ if (isset($_GET['error'])) {
             $message = 'The password\'s provided don\'t match.';
             break;
         case 'taken':
-            $message = 'The email address provided is already registered.';
+            $message = 'The email address or telephone number provided is already registered.';
             break;
         case 'wrong':
             $message = 'The email address or password provided are incorrect.';

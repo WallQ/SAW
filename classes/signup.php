@@ -197,8 +197,8 @@ class SignUp extends Database
     }
     private function userTaken()
     {
-        $stmt = $this->connect()->prepare('SELECT user.id FROM user WHERE user.email = ? LIMIT 1;');
-        if (!$stmt->execute(array($this->email))) {
+        $stmt = $this->connect()->prepare('SELECT user.id FROM user WHERE  user.telephone = ? OR user.email = ? LIMIT 1;');
+        if (!$stmt->execute(array($this->telephone,$this->email))) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/signup?error=stmtfailed');
             exit();
