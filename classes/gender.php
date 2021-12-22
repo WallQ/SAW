@@ -7,7 +7,7 @@ class Gender extends Database
 
     public function getGenders()
     {
-        $stmt = $this->connect()->prepare('SELECT * FROM gender;');
+        $stmt = $this->connect()->prepare('SELECT * FROM gender ORDER BY gender ASC;');
         if (!$stmt->execute()) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');

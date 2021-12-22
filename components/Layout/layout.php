@@ -21,6 +21,7 @@
     include_once('./components/Footer/footer.php');
     ?>
     <script src="<?php echo HOME_URL_PREFIX;?>/assets/scripts/vendor/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo HOME_URL_PREFIX;?>/assets/scripts/main.js"></script>
 </body>
 
 </html>

@@ -88,7 +88,7 @@ if (isset($_GET['cat'])) {
                                     <small class="text-muted"><?php echo $product['city']; ?> - <?php echo date("j M", strtotime($product['data'])); ?></small>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="fw-bold text-emerald-900"><?php echo number_format($product['price'], 2, '.'); ?>$</span>
-                                        <i class="bi bi-heart text-emerald-900"></i>
+                                        <i class="bi bi-heart text-emerald-900" id="like-<?php echo $product['id']; ?>" onclick="Like(<?php echo $product['id']; ?>)"></i>
                                     </div>
                                 </div>
                             </div>

@@ -7,7 +7,7 @@ class Category extends Database
 
     public function getCategories()
     {
-        $stmt = $this->connect()->prepare('SELECT * FROM category;');
+        $stmt = $this->connect()->prepare('SELECT * FROM category ORDER BY category ASC;');
         if (!$stmt->execute()) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');

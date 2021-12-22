@@ -7,7 +7,7 @@ class State extends Database
 
     public function getStates()
     {
-        $stmt = $this->connect()->prepare('SELECT * FROM state;');
+        $stmt = $this->connect()->prepare('SELECT * FROM state ORDER BY state ASC;');
         if (!$stmt->execute()) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
