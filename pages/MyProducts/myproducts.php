@@ -4,7 +4,18 @@ if (!isset($_SESSION['logged'])) {
 }
 $myProduct = new MyProduct();
 $myProducts = $myProduct->getMyProducts($_SESSION['id']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $cleanData = filter_var($_POST['productId'], FILTER_SANITIZE_NUMBER_INT);
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/homepage?error');
+    };
+    $myProduct = $myProduct->deleteProducts($cleanData, $_SESSION['id']);
+    header("Refresh:0");
+}
 ?>
+<?php if (isset($_GET['error'])) {
+    include_once('./includes/error.php');
+} ?>
 <div class="container-fluid bg-body py-5">
     <div class="container">
         <h1 class="display-4 fw-bold text-capitalize text-center text-emerald-900">Your Products</h1>
@@ -31,7 +42,10 @@ $myProducts = $myProduct->getMyProducts($_SESSION['id']);
                                         <span class="fw-bold text-emerald-900"><?php echo number_format($myProduct['price'], 2, '.'); ?>$</span>
                                         <div class="d-flex flex-row">
                                             <a href="#" class="btn btn-emerald fw-bold shadow-none me-2"><i class="bi bi-pencil-fill"></i></i></a>
-                                            <a href="#" class="btn btn-emerald fw-bold shadow-none"><i class="bi bi-trash-fill"></i></i></a>
+                                            <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST">
+                                                <input type="hidden" name="productId" value="<?php echo $myProduct['id']; ?>" required>
+                                                <button type="submit" class="btn btn-emerald fw-bold shadow-none" name="submit" value="submit"><i class="bi bi-trash-fill"></i></i></a>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

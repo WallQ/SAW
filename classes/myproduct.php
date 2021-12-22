@@ -21,4 +21,45 @@ class MyProduct extends Database
         $stmt = null;
         return $result;
     }
+
+    public function deleteProducts($productID, $userID)
+    {
+        $stmt = $this->connect()->prepare('SELECT id FROM product WHERE product.id = ? AND product.user_id = ?;');
+        if (!$stmt->execute(array($productID, $userID))) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
+            exit();
+        }
+        if ($stmt->rowCount() === 0) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
+            exit();
+        }
+        $stmt = $this->connect()->prepare('SELECT fileName FROM productimage WHERE productimage.product_id = ?;');
+        if (!$stmt->execute(array($productID))) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
+            exit();
+        }
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetchAll();
+        } else {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
+            exit();
+        }
+        $stmt = $this->connect()->prepare('DELETE FROM product WHERE product.id = ? AND product.user_id = ?;');
+        if (!$stmt->execute(array($productID, $userID))) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
+            exit();
+        }
+        foreach ($result as $key => $value) {
+            $filePath = './assets/images/uploads/products/' . $value['fileName'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+        $stmt = null;
+    }
 }
