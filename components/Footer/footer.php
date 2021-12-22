@@ -1,7 +1,7 @@
 <footer>
     <div class="p-3 color-emerald-900 sticky-bottom">
         <div class="container">
-            <div class="d-flex flex-row justify-content-between align-items-center">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                 <div class="d-flex flex-column">
                     <a href="<?php echo HOME_URL_PREFIX;?>/" class="text-white text-decoration-none logo">
                         <i class="bi bi-tags-fill"></i>

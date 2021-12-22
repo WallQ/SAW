@@ -11,7 +11,7 @@ if (isset($_GET['pag'])) {
 } else {
     $page = 1;
 }
-$resultsPerPage = 6;
+$resultsPerPage = 16;
 $firstElement = ($page - 1) * $resultsPerPage;
 $numberOfProducts = $homepage->getNumberOfProducts();
 $numberOfPages = ceil($numberOfProducts / $resultsPerPage);
@@ -30,7 +30,7 @@ if (isset($_GET['cat'])) {
 } ?>
 <div class="container-fluid color-emerald-50 py-5">
     <div class="container">
-        <form action="#" method="POST">
+        <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST">
             <div class="input-group input-group-lg">
                 <input type="text" class="form-control shadow-none border-emerald" placeholder="Search..." name="search" required>
                 <button type="submit" class="btn shadow-none bg-white border-emerald" name="submit" value="submit"><i class="bi bi-search"></i></button>
@@ -76,7 +76,7 @@ if (isset($_GET['cat'])) {
             if (isset($products)) {
                 foreach ($products as $product) { ?>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3 col-xxl-3">
-                        <div class="card card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
+                        <div class="card card-body card-h shadow-sm p-3 card-m-tb bg-body rounded justify-content-between">
                             <a href="<?php echo HOME_URL_PREFIX; ?>/product?id=<?php echo $product['id']; ?>" class="text-decoration-none">
                                 <img src="./assets/images/uploads/products/<?php echo $product['fileName']; ?>" class="card-img-top card-image-top" alt="<?php echo $product['name']; ?>" width="200" height="200" loading="lazy">
                             </a>
@@ -98,7 +98,7 @@ if (isset($_GET['cat'])) {
                 }
             } else { ?>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                    <h1 class="display-6 text-capitalize text-center text-emerald-900">There is currently no products in this category.</h1>
+                    <h1 class="display-6 text-capitalize text-center text-emerald-900">No products were found matching your selections.</h1>
                 </div>
             <?php
             }

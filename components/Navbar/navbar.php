@@ -16,7 +16,8 @@
                             <?php
                             if (isset($_SESSION['logged'])) {
                             ?>
-                                <li><a class="dropdown-item" href="<?php echo HOME_URL_PREFIX;?>/account">Profile</a></li>
+                                <li><a class="dropdown-item" href="<?php echo HOME_URL_PREFIX;?>/account">Account</a></li>
+                                <li><a class="dropdown-item" href="<?php echo HOME_URL_PREFIX;?>/myproducts">My Products</a></li>
                                 <li><a class="dropdown-item" href="<?php echo HOME_URL_PREFIX;?>/sell">Sell</a></li>
                                 <li><a class="dropdown-item" href="<?php echo HOME_URL_PREFIX;?>/signout">Sign Out</a></li>
                             <?php } else { ?>
@@ -35,6 +36,7 @@
                             if (isset($_SESSION['logged'])) {
                             ?>
                                 <a href="<?php echo HOME_URL_PREFIX;?>/account" class="btn btn-outline-emerald fw-bold shadow-none me-3"><i class="bi bi-person-fill me-2"></i></i>Account</a>
+                                <a href="<?php echo HOME_URL_PREFIX;?>/myproducts" class="btn btn-outline-emerald fw-bold shadow-none me-3"><i class="bi bi-hexagon-fill me-2"></i></i>My Products</a>
                                 <a href="<?php echo HOME_URL_PREFIX;?>/sell" class="btn btn-outline-emerald fw-bold shadow-none me-3"><i class="bi bi-cart-fill me-2"></i>Sell</a>
                                 <a href="<?php echo HOME_URL_PREFIX;?>/signout" class="btn btn-outline-emerald fw-bold shadow-none"><i class="bi bi-person-x-fill me-2"></i>Sign Out</a>
                             <?php } else { ?>
