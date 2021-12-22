@@ -54,11 +54,17 @@ class MyProduct extends Database
             header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
             exit();
         }
-        foreach ($result as $key => $value) {
-            $filePath = './assets/images/uploads/products/' . $value['fileName'];
-            if (file_exists($filePath)) {
-                unlink($filePath);
+        if ($stmt->rowCount() > 0) {
+            foreach ($result as $key => $value) {
+                $filePath = './assets/images/uploads/products/' . $value['fileName'];
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
             }
+        } else {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
+            exit();
         }
         $stmt = null;
     }

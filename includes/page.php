@@ -24,8 +24,14 @@ switch ($page) {
     case 'product':
         include_once('./pages/Product/product.php');
         break;
+    case 'forgotpassword':
+        include_once('./pages/ForgotPassword/forgotpassword.php');
+        break;
+    case 'newpassword':
+        include_once('./pages/NewPassword/newpassword.php');
+        break;
     case 'dashboard':
-        include_once('./pages/Dashboard');
+        include_once('./pages/Dashboard/');
         break;
     default:
         include_once('./pages/Homepage/homepage.php');

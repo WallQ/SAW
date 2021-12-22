@@ -55,6 +55,9 @@ if (isset($_GET['error'])) {
         case 'price':
             $message = 'Please enter a valid price.';
             break;
+        case 'request':
+            $message = 'The email address or token provided are incorrect.';
+            break;
         case 'notfound':
             $message = 'The email address provided is not registered.';
             break;

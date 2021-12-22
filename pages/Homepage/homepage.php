@@ -46,7 +46,7 @@ if (isset($_GET['cat'])) {
             if (isset($categories)) {
                 foreach ($categories as $category) { ?>
                     <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-2 col-xxl-2">
-                        <div class="d-flex flex-row justify-content-center">
+                        <div class="d-flex flex-row justify-content-center align-content-center">
                             <a href="<?php echo HOME_URL_PREFIX; ?>/homepage?cat=<?php echo $category['id']; ?>" class="text-link text-decoration-none">
                                 <div class="d-flex flex-column pb-4">
                                     <img src="./assets/images/categories/<?php echo $category['fileName']; ?>" class="rounded-circle rounded-circle-top color-emerald-100" alt="<?php echo $category['category']; ?>" width="100" height="100" loading="lazy">

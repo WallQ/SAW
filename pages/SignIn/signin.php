@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     header('location: ' . HOME_URL_PREFIX . '/account');
 }
 ?>
-<div class="container-fluid bg-body py-5">
+<div class="container-fluid color-emerald-50 py-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mx-auto">
@@ -57,8 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="input-group input-group-lg mb-3">
-                            <input type="checkbox" class="form-check-input shadow-none" id="rememberMe" name="rememberMe" value="rememberMe" checked>&nbsp;Remember me
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="input-group input-group-lg mb-3">
+                                    <input type="checkbox" class="form-check-input shadow-none" id="rememberMe" name="rememberMe" value="rememberMe" checked>&nbsp;Remember me
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-end">
+                                    <a href="<?php echo HOME_URL_PREFIX; ?>/forgotpassword" class="text-link text-decoration-none text-emerald-900">Forgot your password?</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="input-group input-group-lg mb-3">

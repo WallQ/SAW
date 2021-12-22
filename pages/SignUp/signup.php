@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     header('location: ' . HOME_URL_PREFIX . '/signin');
 }
 ?>
-<div class="container-fluid bg-body py-5">
+<div class="container-fluid color-emerald-50 py-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mx-auto">

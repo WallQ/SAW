@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
-    <meta charset="utf-8">
     <title>SAW</title>
+    <meta charset="utf-8" />
     <meta name="author" content="André & Sérgio" />
     <meta name="description" content="This is an evaluation project for the unit SAW." />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg" href="<?php echo HOME_URL_PREFIX;?>/assets/favicon.ico" />
+    <link rel="icon" type="image/svg" href="<?php echo HOME_URL_PREFIX;?>/assets/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/styles/vendor/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/icons/bootstrap-icons.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/styles/main.css" />

@@ -52,7 +52,7 @@ class SignIn extends Database
             $stmt = null;
             header('location:' . HOME_URL_PREFIX . '/signin?error=wrong');
             exit();
-        } elseif ($comparePassword) {
+        } else {
             $stmt = $this->connect()->prepare('SELECT * FROM user WHERE user.email = ?;');
 
             if (!$stmt->execute(array($this->email))) {

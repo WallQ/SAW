@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
 <?php if (isset($_GET['error'])) {
     include_once('./includes/error.php');
 } ?>
-<div class="container-fluid bg-body py-5">
+<div class="container-fluid color-emerald-50 py-5">
     <div class="container">
         <h1 class="display-4 fw-bold text-capitalize text-center text-emerald-900">Your Products</h1>
         <div class="row mt-5">
