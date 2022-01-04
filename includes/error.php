@@ -63,7 +63,7 @@ if (isset($_GET['error'])) {
             break;
         case 'stmtfailed':
             $message = 'Something went wrong.';
-            break;
+            break;         
         default:
             $message = 'Something went wrong!';
             break;

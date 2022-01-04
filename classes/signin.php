@@ -44,7 +44,7 @@ class SignIn extends Database
             header('location:' . HOME_URL_PREFIX . '/signin?error=notfound');
             exit();
         }
-
+        
         $passwordHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $comparePassword = password_verify($this->password, $passwordHashed[0]['password']);
 
