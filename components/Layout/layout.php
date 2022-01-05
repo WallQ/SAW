@@ -11,6 +11,7 @@
     <link rel="icon" type="image/svg" href="<?php echo HOME_URL_PREFIX;?>/assets/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/styles/vendor/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/icons/bootstrap-icons.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/styles/vendor/lightbox.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo HOME_URL_PREFIX;?>/assets/styles/main.css" />
 </head>
 
@@ -21,6 +22,7 @@
     include_once('./components/Footer/footer.php');
     ?>
     <script src="<?php echo HOME_URL_PREFIX;?>/assets/scripts/vendor/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo HOME_URL_PREFIX;?>/assets/scripts/vendor/lightbox-plus-jquery.min.js"></script>
     <script src="<?php echo HOME_URL_PREFIX;?>/assets/scripts/main.js"></script>
 </body>
 

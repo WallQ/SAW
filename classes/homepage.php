@@ -7,7 +7,7 @@ class Homepage extends Database
 
     public function getProducts($resultsPerPage, $firstElement)
     {
-        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.data, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id ORDER BY p.data DESC LIMIT ?,?;');
+        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.date, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id ORDER BY p.date DESC LIMIT ?,?;');
         if (!$stmt->execute(array($firstElement, $resultsPerPage))) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
@@ -24,7 +24,7 @@ class Homepage extends Database
 
     public function getProductsByCategory($categoryId, $resultsPerPage, $firstElement)
     {
-        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.data, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id WHERE p.category_id = ? ORDER BY p.data DESC LIMIT ?,?;');
+        $stmt = $this->connect()->prepare('SELECT p.id, p.name, p.price, p.date, i.fileName, u.city FROM product AS p INNER JOIN productimage AS i ON i.id = (SELECT id FROM productimage AS i2 WHERE i2.product_id = p.id LIMIT 1) INNER JOIN user AS u ON p.user_id = u.id WHERE p.category_id = ? ORDER BY p.date DESC LIMIT ?,?;');
         if (!$stmt->execute(array($categoryId, $firstElement, $resultsPerPage))) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');

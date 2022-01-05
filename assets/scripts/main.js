@@ -7,3 +7,15 @@ function Like(id) {
 		document.getElementById('like-' + id).classList.add('bi-heart');
 	}
 }
+
+lightbox.option({
+	alwaysShowNavOnTouchDevices: true,
+	albumLabel: 'Image %1 of %2',
+	disableScrolling: true,
+	fadeDuration: 600,
+	fitImagesInViewport: true,
+	imageFadeDuration: true,
+	resizeDuration: 700,
+	showImageNumberLabel: true,
+	wrapAround: true,
+});

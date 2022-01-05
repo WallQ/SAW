@@ -85,9 +85,9 @@ if (isset($_GET['cat'])) {
                                     <p class="card-title card-title-truncate h6 text-emerald-900"><?php echo $product['name']; ?></p>
                                 </a>
                                 <div class="d-flex flex-column">
-                                    <small class="text-muted"><?php echo $product['city']; ?> - <?php echo date("j M", strtotime($product['data'])); ?></small>
+                                    <small class="text-muted"><?php echo $product['city']; ?> - <?php echo date("j M", strtotime($product['date'])); ?></small>
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <span class="fw-bold text-emerald-900"><?php echo number_format($product['price'], 2, '.'); ?>$</span>
+                                        <span class="fw-bold text-emerald-900">$<?php echo number_format($product['price'], 2, '.'); ?></span>
                                         <i class="bi bi-heart text-emerald-900" id="like-<?php echo $product['id']; ?>" onclick="Like(<?php echo $product['id']; ?>)"></i>
                                     </div>
                                 </div>

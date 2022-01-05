@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                                 </a>
                                 <p class="fw-normal text-emerald-900 card-text-truncate card-description-h"><?php echo $myProduct['description']; ?>
                                 <div class="d-flex flex-column">
-                                    <small class="text-muted"><?php echo date("j F", strtotime($myProduct['data'])); ?></small>
+                                    <small class="text-muted"><?php echo date("j F", strtotime($myProduct['date'])); ?></small>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="fw-bold text-emerald-900"><?php echo number_format($myProduct['price'], 2, '.'); ?>$</span>
                                         <div class="d-flex flex-row">
