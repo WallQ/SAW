@@ -60,7 +60,7 @@ if (!isset($result)) {
                         <?php
                             if (!isset($_SESSION['logged'])) {
                         ?>
-                            <button href="#" class="btn btn-emerald fw-bold shadow-none w-100" disabled name="contact" value="contact"><i class="bi bi-telephone-fill me-2"></i>Contact</button>
+                            <a href="<?php echo HOME_URL_PREFIX;?>/signin" class="btn btn-emerald fw-bold shadow-none w-100" disabled name="contact" value="contact"><i class="bi bi-telephone-fill me-2"></i>Contact</a>
                         <?php
                             } else {
                         ?>
