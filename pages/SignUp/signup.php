@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-lg mb-3">
-                            <input type="text" class="form-control shadow-none border-emerald text-emerald-900" placeholder="First name" aria-label="First name" name="firstName" required>
+                            <input type="text" class="form-control shadow-none border-emerald" placeholder="First name" aria-label="First name" name="firstName" required>
                         </div>
                     </div>
                     <div class="col-md-6">
