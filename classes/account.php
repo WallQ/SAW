@@ -24,4 +24,34 @@ class Account extends Database
         $stmt = null;
         return $result;
     }
+
+    public function updateUser($data)
+    {
+        if($data['image']['size'] === 0) {
+            $stmt = $this->connect()->prepare('UPDATE user SET firstName = ?, lastName = ?, telephone = ?, gender_id = ?, state_id = ?, city = ?, zipCode = ? WHERE id = ?;');
+            if (!$stmt->execute(array($data['firstName'],$data['lastName'],$data['telephone'],$data['gender'],$data['state'],$data['city'],$data['zipCode'],$data['id']))) {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
+                exit();
+            }
+        } else {
+            $fileName = $data['image']['name'];
+            $fileNameTemp = $data['image']['tmp_name'];
+            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+            $finalFileName = uniqid(rand(), true) . '.' . $extension;
+            $path = './assets/images/uploads/users/' . $finalFileName;
+            if (!move_uploaded_file($fileNameTemp, $path)) {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
+                exit();
+            }
+            $stmt = $this->connect()->prepare('UPDATE user SET firstName = ?, lastName = ?, telephone = ?, gender_id = ?, state_id = ?, city = ?, zipCode = ?, imagePath = ? WHERE id = ?;');
+            if (!$stmt->execute(array($data['firstName'],$data['lastName'],$data['telephone'],$data['gender'],$data['state'],$data['city'],$data['zipCode'],$finalFileName,$data['id']))) {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
+                exit();
+            }
+        }
+        $stmt = null;
+    }
 }
