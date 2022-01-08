@@ -24,7 +24,7 @@ if (!isset($result)) {
                                 print_r($key);
                         ?>
                             <div class="carousel-item carousel-s <?php if($key === 0) echo ('active') ?>" data-bs-interval="30000">
-                                <a href="./assets/images/uploads/products/<?php echo $image['fileName'];?>" data-lightbox="product" data-title="<?php echo $result[0]['name']?>"><img src="./assets/images/uploads/products/<?php echo $image['fileName'];?>" class="d-block w-100" alt="Product Image" loading="lazy"></a>
+                                <a href="./assets/images/uploads/products/<?php echo $image['fileName'];?>" data-lightbox="product" data-title="<?php echo $result[0]['name']?>"><img src="./assets/images/uploads/products/<?php echo $image['fileName'];?>" style="object-fit: cover;" class="d-block w-100" alt="Product Image" loading="lazy"></a>
                             </div>
                         <?php
                             }

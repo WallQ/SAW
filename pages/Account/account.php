@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 col-xxl-3">
                 <div class="d-flex flex-column bg-white px-4 py-4">
                     <div class="flex-column text-center">
-                        <img src="./assets/images/uploads/users/<?php echo $user[0]['imagePath'] ?>" class="rounded-circle" alt="Avatar" width="120" height="120">
+                        <img src="./assets/images/uploads/users/<?php echo $user[0]['imagePath'] ?>" style="object-fit: cover;" class="rounded-circle" alt="Avatar" width="120" height="120">
                         <div class="mt-4">
                             <input type="file" class="form-control" id="fileUpload" name="image">
                         </div>
