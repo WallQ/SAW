@@ -31,7 +31,7 @@ switch ($page) {
         include_once('./pages/NewPassword/newpassword.php');
         break;
     case 'dashboard':
-        include_once('./pages/Dashboard/');
+        include_once('./pages/Dashboard/dashboard.php');
         break;
     default:
         include_once('./pages/Homepage/homepage.php');

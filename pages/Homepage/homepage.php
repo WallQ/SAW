@@ -24,6 +24,24 @@ if (isset($_GET['cat'])) {
 } else {
     $products = $homepage->getProducts($resultsPerPage, $firstElement);
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $data = array(
+        'name' => $_POST['name'],
+        'email' => $_POST['email']
+    );
+    $args = array(
+        'name' => FILTER_SANITIZE_STRING,
+        'email' => FILTER_SANITIZE_EMAIL
+    );
+    $cleanData = filter_var_array($data, $args);
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/homepage?error');
+    }
+
+    $newsletter = new Newsletter($cleanData);
+    $newsletter->subscribe();
+    header("Refresh:0");
+}
 ?>
 <?php if (isset($_GET['error'])) {
     include_once('./includes/error.php');

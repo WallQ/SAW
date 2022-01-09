@@ -24,12 +24,11 @@ if (!isset($result)) {
                                 print_r($key);
                         ?>
                             <div class="carousel-item carousel-s <?php if($key === 0) echo ('active') ?>" data-bs-interval="30000">
-                                <a href="./assets/images/uploads/products/<?php echo $image['fileName'];?>" data-lightbox="product" data-title="<?php echo $result[0]['name']?>"><img src="./assets/images/uploads/products/<?php echo $image['fileName'];?>" style="object-fit: cover;" class="d-block w-100" alt="Product Image" loading="lazy"></a>
+                                <a href="./assets/images/uploads/products/<?php echo $image['fileName'];?>" data-lightbox="product" data-title="<?php echo $result[0]['name']?>"><img src="./assets/images/uploads/products/<?php echo $image['fileName'];?>" class="d-block w-100" alt="Product Image" loading="lazy"></a>
                             </div>
                         <?php
                             }
                         ?>
-
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselProduct" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -49,7 +48,7 @@ if (!isset($result)) {
                     </div>
                     <div class="flex-column mt-4">
                         <div class="d-inline-flex">
-                            <img src="./assets/images/uploads/users/<?php echo $result[0]['imagePath']?>" class="rounded-circle" alt="Avatar" width="80" height="80">
+                            <img src="./assets/images/uploads/users/<?php echo $result[0]['imagePath']?>" class="avatar rounded-circle" alt="Avatar">
                             <div>
                                 <h4 class="fw-bold text-emerald-900 ms-4 mb-0 card-text-truncate"><?php echo ($result[0]['firstName'].' '.$result[0]['lastName'] ); ?></h4>
                                 <p class="fw-normal text-emerald-900 ms-4 card-text-truncate">User of SAW since <?php echo date("j F Y", strtotime($result[0]['createdDate'])); ?></p>

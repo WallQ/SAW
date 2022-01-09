@@ -33,9 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     if (!$cleanData) {
         header('location: ' . HOME_URL_PREFIX . '/signup?error');
     }
-    print_r('<pre>');
-    print_r($cleanData);
-    print_r('</pre>');
     $account->updateUser($cleanData);
     header("Refresh:0");
 }

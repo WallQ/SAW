@@ -70,6 +70,7 @@ class SignIn extends Database
             $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $_SESSION['id'] = $user[0]['id'];
             $_SESSION['email'] = $user[0]['email'];
+            $_SESSION['level'] = $user[0]['level'];
             $_SESSION['logged'] = TRUE;
         }
         $stmt = null;

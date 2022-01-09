@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                                     <div class="d-flex justify-content-between align-items-center">
                                         <span class="fw-bold text-emerald-900"><?php echo number_format($myProduct['price'], 2, '.'); ?>$</span>
                                         <div class="d-flex flex-row">
-                                            <a href="#" class="btn btn-emerald fw-bold shadow-none me-2"><i class="bi bi-pencil-fill"></i></i></a>
+                                            <a href="#" class="btn btn-emerald fw-bold shadow-none me-2"><i class="bi bi-pencil-fill"></i></a>
                                             <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST">
                                                 <input type="hidden" name="productId" value="<?php echo $myProduct['id']; ?>" required>
-                                                <button type="submit" class="btn btn-emerald fw-bold shadow-none" name="submit" value="submit"><i class="bi bi-trash-fill"></i></i></a>
+                                                <button type="submit" class="btn btn-emerald fw-bold shadow-none" name="submit" value="submit"><i class="bi bi-trash-fill"></i></button>
                                             </form>
                                         </div>
                                     </div>
