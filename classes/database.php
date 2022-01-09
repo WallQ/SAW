@@ -26,7 +26,8 @@ class Database
         try {
             return new PDO($dsn, $this->username, $this->password, $options);
         } catch (PDOException $e) {
-            throw new Exception($e->getMessage());
+            print("Error connecting to database.");
+            die(print_r($e));
         }
     }
 }

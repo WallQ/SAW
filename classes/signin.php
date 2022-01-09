@@ -32,6 +32,20 @@ class SignIn extends Database
             header('location:' . HOME_URL_PREFIX . '/signin?error=password');
             exit();
         }
+
+        $stmt = $this->connect()->prepare('SELECT COUNT(*) AS attempts FROM attempt WHERE date >= DATE_SUB(NOW(),INTERVAL 1 HOUR) AND email = ?;');
+        if (!$stmt->execute(array($this->email))) {
+            $stmt = null;
+            header('location:' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
+            exit();
+        }
+        $result = $stmt->fetchAll();
+        if ($result[0]['attempts'] === 3) {
+            $stmt = null;
+            header('location:' . HOME_URL_PREFIX . '/signin?error=blocked');
+            exit();
+        }
+
         $stmt = $this->connect()->prepare('SELECT user.password FROM user WHERE user.email = ?;');
         if (!$stmt->execute(array($this->email))) {
             $stmt = null;
@@ -49,12 +63,45 @@ class SignIn extends Database
         $comparePassword = password_verify($this->password, $passwordHashed[0]['password']);
 
         if (!$comparePassword) {
+            $stmt = $this->connect()->prepare('INSERT INTO attempt (email) VALUES (?);');
+            if (!$stmt->execute(array($this->email))) {
+                $stmt = null;
+                header('location:' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
+                exit();
+            }
+            $stmt = $this->connect()->prepare('SELECT COUNT(*) AS attempts FROM attempt WHERE email = ?;');
+            if (!$stmt->execute(array($this->email))) {
+                $stmt = null;
+                header('location:' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
+                exit();
+            }
+            $result = $stmt->fetchAll();
+            if ($result[0]['attempts'] === 3) {
+                $stmt = $this->connect()->prepare('UPDATE user SET status = "Blocked" WHERE email = ?;');
+                if (!$stmt->execute(array($this->email))) {
+                    $stmt = null;
+                    header('location: ' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
+                    exit();
+                }
+            }
             $stmt = null;
             header('location:' . HOME_URL_PREFIX . '/signin?error=wrong');
             exit();
-        } else {
-            $stmt = $this->connect()->prepare('SELECT * FROM user WHERE user.email = ?;');
+        } else {            
+            $stmt = $this->connect()->prepare('DELETE FROM attempt WHERE email = ?;');
+            if (!$stmt->execute(array($this->email))) {
+                $stmt = null;
+                header('location:' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
+                exit();
+            }
+            $stmt = $this->connect()->prepare('UPDATE user SET status = "Allowed" WHERE email = ?;');
+            if (!$stmt->execute(array($this->email))) {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/signin?error=stmtfailed');
+                exit();
+            }
 
+            $stmt = $this->connect()->prepare('SELECT * FROM user WHERE user.email = ?;');
             if (!$stmt->execute(array($this->email))) {
                 $stmt = null;
                 header('location:' . HOME_URL_PREFIX . '/signin?error=stmtfailed');

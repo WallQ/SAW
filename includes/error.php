@@ -63,7 +63,10 @@ if (isset($_GET['error'])) {
             break;
         case 'stmtfailed':
             $message = 'Something went wrong.';
-            break;         
+            break;
+        case 'blocked':
+            $message = 'To many failed sign in attempts. Please try again later.';
+            break;
         default:
             $message = 'Something went wrong!';
             break;

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         <div class="row mt-5">
             <table class="table table-light table-hover">
                 <thead>
-                    <tr class="table-light text-center">
+                    <tr class="table-light text-center text-emerald-900">
                         <th scope="col">Image</th>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="border-top: 2px solid #064e3b!important;">
                     <?php
                     if (isset($users)) {
                         foreach ($users as $user) {
