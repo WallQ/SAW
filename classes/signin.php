@@ -119,6 +119,7 @@ class SignIn extends Database
             $_SESSION['email'] = $user[0]['email'];
             $_SESSION['level'] = $user[0]['level'];
             $_SESSION['logged'] = TRUE;
+            $this->log('Log','SELECT','User signed in successfully! ('.$_SESSION['email'].')');
         }
         $stmt = null;
     }

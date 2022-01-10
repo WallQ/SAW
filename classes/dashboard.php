@@ -9,6 +9,7 @@ class Dashboard extends Database
     {
         $stmt = $this->connect()->prepare('SELECT * FROM user ORDER BY createdDate ASC;');
         if (!$stmt->execute()) {
+            $this->log('Error','SELECT','Users information returned unsuccessfully! ('.$_SESSION['email'].')');
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/dashboard?error=stmtfailed');
             exit();
@@ -18,6 +19,7 @@ class Dashboard extends Database
         } else {
             $result = NULL;
         }
+        $this->log('Log','SELECT','Users information returned successfully! ('.$_SESSION['email'].')');
         $stmt = null;
         return $result;
     }
@@ -26,6 +28,7 @@ class Dashboard extends Database
     {
         $stmt = $this->connect()->prepare('SELECT * FROM user WHERE id = ?;');
         if (!$stmt->execute(array($userID))) {
+            $this->log('Error','SELECT','Users information returned unsuccessfully! ('.$_SESSION['email'].')');
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/dashboard?error=stmtfailed');
             exit();
@@ -33,6 +36,7 @@ class Dashboard extends Database
         if ($stmt->rowCount() > 0) {
             $result = $stmt->fetchAll();
         } else {
+            $this->log('Error','SELECT','Users information returned unsuccessfully! ('.$_SESSION['email'].')');
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/dashboard?error=notfound');
             exit();
@@ -40,6 +44,7 @@ class Dashboard extends Database
         if ($result[0]['status'] === 'Allowed') {
             $stmt = $this->connect()->prepare('UPDATE user SET status = "Blocked" WHERE id = ? LIMIT 1;');
             if (!$stmt->execute(array($userID))) {
+                $this->log('Error','SELECT','User status updated unsuccessfully! ('.$_SESSION['email'].')');
                 $stmt = null;
                 header('location: ' . HOME_URL_PREFIX . '/dashboard?error=stmtfailed');
                 exit();
@@ -47,11 +52,13 @@ class Dashboard extends Database
         } else if ($result[0]['status'] === 'Blocked') {
             $stmt = $this->connect()->prepare('UPDATE user SET status = "Allowed" WHERE id = ? LIMIT 1;');
             if (!$stmt->execute(array($userID))) {
+                $this->log('Error','SELECT','User status updated unsuccessfully! ('.$_SESSION['email'].')');
                 $stmt = null;
                 header('location: ' . HOME_URL_PREFIX . '/dashboard?error=stmtfailed');
                 exit();
             }
         }
+        $this->log('Log','UPDATE','User status updated successfully! ('.$_SESSION['email'].')');
         $stmt = null;
         return $result;
     }
@@ -60,10 +67,12 @@ class Dashboard extends Database
     {
         $stmt = $this->connect()->prepare('DELETE FROM user WHERE id = ?;');
         if (!$stmt->execute(array($userID))) {
+            $this->log('Error','DELETE','User deleted successfully! ('.$_SESSION['email'].')');
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/dashboard?error=stmtfailed');
             exit();
         }
+        $this->log('Log','DELETE','User deleted successfully! ('.$_SESSION['email'].')');
         $stmt = null;
     }
 }

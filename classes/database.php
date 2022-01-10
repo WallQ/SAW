@@ -30,4 +30,22 @@ class Database
             die(print_r($e));
         }
     }
+
+    public function log($type,$subType,$message)
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        $stmt = $this->connect()->prepare('INSERT INTO log (type,subType,message,ip) VALUES (?,?,?,?);');
+        if (!$stmt->execute(array($type,$subType,$message,$ip))) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
+            exit();
+        }
+        $stmt = null;
+    }
 }

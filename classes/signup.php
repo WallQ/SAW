@@ -83,6 +83,7 @@ class SignUp extends Database
             header('location: ' . HOME_URL_PREFIX . '/signup?error=stmtfailed');
             exit();
         }
+        $this->log('Log','INSERT','User signed up successfully! ('.$this->email.')');
         $stmt = null;
     }
     private function isEmpty()

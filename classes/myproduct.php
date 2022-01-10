@@ -66,6 +66,7 @@ class MyProduct extends Database
             header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
             exit();
         }
+        $this->log('Log','DELETE','Product deleted successfully! ('.$_SESSION['email'].')');
         $stmt = null;
     }
 }

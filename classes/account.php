@@ -9,18 +9,20 @@ class Account extends Database
     {
         $stmt = $this->connect()->prepare('SELECT firstName, lastName, telephone, city, zipCode, imagePath, state_id, gender_id FROM user WHERE id = ? AND email = ? LIMIT 1;');
         if (!$stmt->execute(array($userID, $userEmail))) {
+            $this->log('Error','SELECT','User information returned unsuccessfully! ('.$_SESSION['email'].')');
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/homepage?error=stmtfailed');
             exit();
         }
         if ($stmt->rowCount() === 0) {
+            $this->log('Error','SELECT','User information returned unsuccessfully! ('.$_SESSION['email'].')');
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/signin?error');
             exit();
         } else {
             $result = $stmt->fetchAll();
         }
-
+        $this->log('Log','SELECT','User information returned successfully! ('.$_SESSION['email'].')');
         $stmt = null;
         return $result;
     }
@@ -62,6 +64,7 @@ class Account extends Database
         if ($data['image']['size'] === 0) {
             $stmt = $this->connect()->prepare('UPDATE user SET firstName = ?, lastName = ?, telephone = ?, gender_id = ?, state_id = ?, city = ?, zipCode = ? WHERE id = ?;');
             if (!$stmt->execute(array($data['firstName'], $data['lastName'], $data['telephone'], $data['gender'], $data['state'], $data['city'], $data['zipCode'], $data['id']))) {
+                $this->log('Error','SELECT','User information updated unsuccessfully! ('.$_SESSION['email'].')');
                 $stmt = null;
                 header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
                 exit();
@@ -91,6 +94,7 @@ class Account extends Database
             }
             $stmt = $this->connect()->prepare('SELECT imagePath FROM user WHERE id = ?;');
             if (!$stmt->execute(array($data['id']))) {
+                $this->log('Error','SELECT','User information updated unsuccessfully! ('.$_SESSION['email'].')');
                 $stmt = null;
                 header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
                 exit();
@@ -98,6 +102,7 @@ class Account extends Database
             if ($stmt->rowCount() > 0) {
                 $result = $stmt->fetchAll();
             } else {
+                $this->log('Error','SELECT','User information updated unsuccessfully! ('.$_SESSION['email'].')');
                 $stmt = null;
                 header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
                 exit();
@@ -108,11 +113,13 @@ class Account extends Database
             }
             $stmt = $this->connect()->prepare('UPDATE user SET firstName = ?, lastName = ?, telephone = ?, gender_id = ?, state_id = ?, city = ?, zipCode = ?, imagePath = ? WHERE id = ?;');
             if (!$stmt->execute(array($data['firstName'], $data['lastName'], $data['telephone'], $data['gender'], $data['state'], $data['city'], $data['zipCode'], $finalFileName, $data['id']))) {
+                $this->log('Error','SELECT','User information updated unsuccessfully! ('.$_SESSION['email'].')');
                 $stmt = null;
                 header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
                 exit();
             }
         }
+        $this->log('Log','UPDATE','User updated successfully! ('.$_SESSION['email'].')');
         $stmt = null;
     }
 
