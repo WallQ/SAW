@@ -1,60 +1,48 @@
 <?php
 class Sell extends Database
 {
-    private $name;
-    private $category;
-    private $files;
-    private $price;
-    private $description;
-    private $user;
 
-    public function __construct($data)
+    public function __construct()
     {
-        $this->name = $data['name'];
-        $this->category = $data['category'];
-        $this->files = $data['images'];
-        $this->price = $data['price'];
-        $this->description = $data['description'];
-        $this->user = $data['user'];
     }
 
-    public function sellProduct()
+    public function sellProduct($data)
     {
-        if ($this->isEmpty()) {
+        if ($this->isEmpty($data)) {
             header('location:' . HOME_URL_PREFIX . '/sell?error=inputs');
             exit();
         }
-        if ($this->isUploadInvalid()) {
+        if ($this->isUploadInvalid($data['images'])) {
             header('location:' . HOME_URL_PREFIX . '/sell?error=upload');
             exit();
         }
-        if ($this->fileInvalid()) {
+        if ($this->fileInvalid($data['images'])) {
             header('location:' . HOME_URL_PREFIX . '/sell?error=file');
             exit();
         }
-        if ($this->typeInvalid()) {
+        if ($this->typeInvalid($data['images'])) {
             header('location:' . HOME_URL_PREFIX . '/sell?error=type');
             exit();
         }
-        if ($this->sizeInvalid()) {
+        if ($this->sizeInvalid($data['images'])) {
             header('location:' . HOME_URL_PREFIX . '/sell?error=size');
             exit();
         }
-        if ($this->priceInvalid()) {
+        if ($this->priceInvalid($data['price'])) {
             header('location:' . HOME_URL_PREFIX . '/sell?error=price');
             exit();
         }
         $stmt = $this->connect()->prepare('INSERT INTO product (name, price, description, category_id, user_id) VALUES (?, ?, ?, ?, ?);');
-        if (!$stmt->execute(array($this->name, $this->price, $this->description, $this->category, $this->user))) {
+        if (!$stmt->execute(array($data['name'], $data['price'], $data['description'], $data['category'], $data['id']))) {
             $stmt = null;
             header('location: ' . HOME_URL_PREFIX . '/sell?error=stmtfailed');
             exit();
         }
         $stmt = null;
         $productId = $this->connect()->lastInsertId();
-        foreach ($this->files['tmp_name'] as $key => $value) {
-            $fileName = $this->files['name'][$key];
-            $fileNameTemp = $this->files['tmp_name'][$key];
+        foreach ($data['images']['tmp_name'] as $key => $value) {
+            $fileName = $data['images']['name'][$key];
+            $fileNameTemp = $data['images']['tmp_name'][$key];
             $extension = pathinfo($fileName, PATHINFO_EXTENSION);
             $finalFileName = uniqid(rand(), true) . '.' . $extension;
             $path = './assets/images/uploads/products/' . $finalFileName;
@@ -72,15 +60,86 @@ class Sell extends Database
         }
         $stmt = null;
     }
-    private function isEmpty()
+    public function sellProductEdit($data, $productID)
+    {
+        if ($this->isEmpty($data)) {
+            header('location:' . HOME_URL_PREFIX . '/sell?error=inputs');
+            exit();
+        }
+        if ($this->isUploadInvalid($data['images'])) {
+            header('location:' . HOME_URL_PREFIX . '/sell?error=upload');
+            exit();
+        }
+        if ($this->fileInvalid($data['images'])) {
+            header('location:' . HOME_URL_PREFIX . '/sell?error=file');
+            exit();
+        }
+        if ($this->typeInvalid($data['images'])) {
+            header('location:' . HOME_URL_PREFIX . '/sell?error=type');
+            exit();
+        }
+        if ($this->sizeInvalid($data['images'])) {
+            header('location:' . HOME_URL_PREFIX . '/sell?error=size');
+            exit();
+        }
+        if ($this->priceInvalid($data['price'])) {
+            header('location:' . HOME_URL_PREFIX . '/sell?error=price');
+            exit();
+        }
+        $stmt = $this->connect()->prepare('UPDATE product SET name = ?, price = ?, date = ?, description = ?, category_id = ? WHERE id = ?;');
+        if (!$stmt->execute(array($data['name'], $data['price'], date('Y-m-d H:i:s'), $data['description'], $data['category'], $productID))) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/sell?error=stmtfailed');
+            exit();
+        }
+        $stmt = null;
+        foreach ($data['images']['tmp_name'] as $key => $value) {
+            $fileName = $data['images']['name'][$key];
+            $fileNameTemp = $data['images']['tmp_name'][$key];
+            $extension = pathinfo($fileName, PATHINFO_EXTENSION);
+            $finalFileName = uniqid(rand(), true) . '.' . $extension;
+            $path = './assets/images/uploads/products/' . $finalFileName;
+            if (!move_uploaded_file($fileNameTemp, $path)) {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/sell?error=stmtfailed');
+                exit();
+            }
+            $stmt = $this->connect()->prepare('INSERT INTO productimage (fileName, product_id) VALUES (?, ?);');
+            if (!$stmt->execute(array($finalFileName, $productID))) {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/sell?error=stmtfailed');
+                exit();
+            }
+        }
+        $stmt = null;
+    }
+    public function getProduct($productID, $userID)
+    {
+        $stmt = $this->connect()->prepare('SELECT * FROM product WHERE id = ? AND user_id = ?;');
+        if (!$stmt->execute(array($productID, $userID))) {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/sell?error=stmtfailed');
+            exit();
+        }
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetchAll();
+        } else {
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/myproducts?error=stmtfailed');
+            exit();
+        }
+        $stmt = null;
+        return $result;
+    }
+    private function isEmpty($data)
     {
         if (
-            empty($this->name) ||
-            empty($this->category) ||
-            empty($this->files) ||
-            empty($this->price) ||
-            empty($this->description) ||
-            empty($this->user)
+            empty($data['name']) ||
+            empty($data['category']) ||
+            empty($data['images']) ||
+            empty($data['price']) ||
+            empty($data['description']) ||
+            empty($data['id'])
         ) {
             $result = true;
         } else {
@@ -88,10 +147,10 @@ class Sell extends Database
         }
         return $result;
     }
-    private function isUploadInvalid()
+    private function isUploadInvalid($files)
     {
-        foreach ($this->files['tmp_name'] as $key => $value) {
-            if (!file_exists($this->files['tmp_name'][$key]) || !is_uploaded_file($this->files['tmp_name'][$key])) {
+        foreach ($files['tmp_name'] as $key => $value) {
+            if (!file_exists($files['tmp_name'][$key]) || !is_uploaded_file($files['tmp_name'][$key])) {
                 $result = true;
                 break;
             } else {
@@ -100,10 +159,10 @@ class Sell extends Database
         }
         return $result;
     }
-    private function fileInvalid()
+    private function fileInvalid($files)
     {
-        foreach ($this->files['tmp_name'] as $key => $value) {
-            $fileError = $this->files['error'][$key];
+        foreach ($files['tmp_name'] as $key => $value) {
+            $fileError = $files['error'][$key];
             if ($fileError !== 0) {
                 $result = true;
                 break;
@@ -113,11 +172,11 @@ class Sell extends Database
         }
         return $result;
     }
-    private function typeInvalid()
+    private function typeInvalid($files)
     {
         $extensions = array('jpeg', 'jpg');
-        foreach ($this->files['tmp_name'] as $key => $value) {
-            $fileName = $this->files['name'][$key];
+        foreach ($files['tmp_name'] as $key => $value) {
+            $fileName = $files['name'][$key];
             $extension = pathinfo($fileName, PATHINFO_EXTENSION);
             if (!in_array($extension, $extensions)) {
                 $result = true;
@@ -128,10 +187,10 @@ class Sell extends Database
         }
         return $result;
     }
-    private function sizeInvalid()
+    private function sizeInvalid($files)
     {
-        foreach ($this->files['tmp_name'] as $key => $value) {
-            $fileSize = $this->files['size'][$key];
+        foreach ($files['tmp_name'] as $key => $value) {
+            $fileSize = $files['size'][$key];
             if ($fileSize > 2097152) {
                 $result = true;
                 break;
@@ -141,9 +200,9 @@ class Sell extends Database
         }
         return $result;
     }
-    private function priceInvalid()
+    private function priceInvalid($price)
     {
-        if (!preg_match('/[0-9]+/', $this->price)) {
+        if (!preg_match('/[0-9]+/', $price)) {
             $result = true;
         } else {
             $result = false;

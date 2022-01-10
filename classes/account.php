@@ -89,6 +89,23 @@ class Account extends Database
                 header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
                 exit();
             }
+            $stmt = $this->connect()->prepare('SELECT imagePath FROM user WHERE id = ?;');
+            if (!$stmt->execute(array($data['id']))) {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
+                exit();
+            }
+            if ($stmt->rowCount() > 0) {
+                $result = $stmt->fetchAll();
+            } else {
+                $stmt = null;
+                header('location: ' . HOME_URL_PREFIX . '/account?error=stmtfailed');
+                exit();
+            }
+            $filePath = './assets/images/uploads/users/' . $result[0]['imagePath'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
             $stmt = $this->connect()->prepare('UPDATE user SET firstName = ?, lastName = ?, telephone = ?, gender_id = ?, state_id = ?, city = ?, zipCode = ?, imagePath = ? WHERE id = ?;');
             if (!$stmt->execute(array($data['firstName'], $data['lastName'], $data['telephone'], $data['gender'], $data['state'], $data['city'], $data['zipCode'], $finalFileName, $data['id']))) {
                 $stmt = null;

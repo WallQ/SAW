@@ -244,6 +244,7 @@
 	min-height: 35rem;
 	max-height: 35rem;
 	object-fit: cover;
+	object-position: 50% 50%; 
 }
 
 .custom-file-upload {

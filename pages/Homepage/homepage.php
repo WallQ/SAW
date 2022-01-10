@@ -11,7 +11,7 @@ if (isset($_GET['pag'])) {
 } else {
     $page = 1;
 }
-$resultsPerPage = 16;
+$resultsPerPage = 8;
 $firstElement = ($page - 1) * $resultsPerPage;
 $numberOfProducts = $homepage->getNumberOfProducts();
 $numberOfPages = ceil($numberOfProducts / $resultsPerPage);

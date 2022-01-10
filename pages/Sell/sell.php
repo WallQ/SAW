@@ -2,6 +2,14 @@
 if (!isset($_SESSION['logged'])) {
     header('location: ' . HOME_URL_PREFIX . '/signin');
 }
+$sell = new Sell();
+if (isset($_GET['id'])) {
+    $cleanData = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+    if (!$cleanData) {
+        header('location: ' . HOME_URL_PREFIX . '/homepage?error');
+    }
+    $result = $sell->getProduct($cleanData, $_SESSION['id']);
+}
 $category = new Category();
 $categories = $category->getCategories();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
@@ -11,14 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         'images' => $_FILES['images'],
         'price' => $_POST['price'],
         'description' => $_POST['description'],
-        'user' => $_SESSION['id']
     );
+    if (isset($_GET['id'])) {
+        $data += ['id' => $_GET['id']];
+    } else {
+        $data += ['id' => $_SESSION['id']];
+    }
     $args = array(
         'name' => FILTER_SANITIZE_STRING,
         'category' => FILTER_SANITIZE_NUMBER_INT,
         'price' => FILTER_SANITIZE_NUMBER_INT,
         'description' => FILTER_SANITIZE_STRING,
-        'user' => FILTER_SANITIZE_NUMBER_INT
+        'id' => FILTER_SANITIZE_NUMBER_INT
     );
     $cleanData = filter_var_array($data, $args);
     $cleanData += ['images' => $data['images']];
@@ -27,7 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     }
 
     $sell = new Sell($cleanData);
-    $sell->sellProduct();
+    if (isset($_GET['id'])) {
+        $sell->sellProductEdit($cleanData, $_GET['id']);
+    } else {
+        $sell->sellProduct($cleanData);
+    }
     header('location: ' . HOME_URL_PREFIX . '/myproducts');
 }
 ?>
@@ -45,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-lg mb-3">
-                            <input type="text" class="form-control text-emerald-900 border-emerald shadow-none" placeholder="Name" aria-label="name" name="name" required>
+                            <input type="text" class="form-control text-emerald-900 border-emerald shadow-none" placeholder="Name" aria-label="name" name="name" value="<?php if(isset($result)) { echo $result[0]['name']; } ?>" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -55,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                                 <select class="form-select shadow-none border-emerald" aria-label="Category" name="category" required>
                                     <?php
                                     foreach ($categories as $category) { ?>
-                                        <option value="<?php echo $category['id']; ?>"><?php echo $category['category']; ?></option>
+                                        <option value="<?php echo $category['id']; ?>" <?php if(isset($result)) { if($result[0]['category_id'] === $category['id']) { echo 'selected'; } } ?>><?php echo $category['category']; ?></option>
                                     <?php
                                     } ?>
                                 </select>
@@ -65,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </div>
                     <div class="col-md-6">
                         <div class="input-group input-group-lg mb-3">
-                            <input type="number" class="form-control text-emerald-900 border-emerald shadow-none" placeholder="Price" aria-label="Price" name="price" required>
+                            <input type="number" class="form-control text-emerald-900 border-emerald shadow-none" placeholder="Price" aria-label="Price" name="price" value="<?php if(isset($result)) { echo $result[0]['price']; } ?>" required>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -75,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     </div>
                     <div class="col-md-12">
                         <div class="input-group input-group-lg mb-3">
-                            <textarea class="form-control text-emerald-900 border-emerald shadow-none" rows="4" placeholder="Description" aria-label="Description" name="description" required></textarea>
+                            <textarea class="form-control text-emerald-900 border-emerald shadow-none" rows="4" placeholder="Description" aria-label="Description" name="description" required><?php if(isset($result)) { echo $result[0]['description']; } ?></textarea>
                         </div>
                     </div>
                     <div class="input-group input-group-lg mb-3">
