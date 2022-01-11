@@ -24,6 +24,25 @@ class Dashboard extends Database
         return $result;
     }
 
+    public function getLogs()
+    {
+        $stmt = $this->connect()->prepare('SELECT * FROM log ORDER BY id ASC;');
+        if (!$stmt->execute()) {
+            $this->log('Error','SELECT','Logs information returned unsuccessfully! ('.$_SESSION['email'].')');
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/dashboard?error=stmtfailed');
+            exit();
+        }
+        if ($stmt->rowCount() > 0) {
+            $result = $stmt->fetchAll();
+        } else {
+            $result = NULL;
+        }
+        $this->log('Log','SELECT','Logs information returned successfully! ('.$_SESSION['email'].')');
+        $stmt = null;
+        return $result;
+    }
+
     public function setStatus($userID)
     {
         $stmt = $this->connect()->prepare('SELECT * FROM user WHERE id = ?;');
@@ -73,6 +92,19 @@ class Dashboard extends Database
             exit();
         }
         $this->log('Log','DELETE','User deleted successfully! ('.$_SESSION['email'].')');
+        $stmt = null;
+    }
+
+    public function deleteLog($logID)
+    {
+        $stmt = $this->connect()->prepare('DELETE FROM log WHERE id = ?;');
+        if (!$stmt->execute(array($logID))) {
+            $this->log('Error','DELETE','Log deleted successfully! ('.$_SESSION['email'].')');
+            $stmt = null;
+            header('location: ' . HOME_URL_PREFIX . '/dashboard?error=stmtfailed');
+            exit();
+        }
+        $this->log('Log','DELETE','Log deleted successfully! ('.$_SESSION['email'].')');
         $stmt = null;
     }
 }

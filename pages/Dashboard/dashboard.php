@@ -7,17 +7,28 @@ if ($_SESSION['level'] !== 'Admin') {
 }
 $dashboard = new Dashboard();
 $users = $dashboard->getUsers();
+$logs = $dashboard->getLogs();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-    $cleanData = filter_var($_POST['userID'], FILTER_SANITIZE_NUMBER_INT);
-    if (!$cleanData) {
-        header('location: ' . HOME_URL_PREFIX . '/dashboard?error');
-    };
-    if ($_POST['submit'] === 'status') {
-        $dashboard->setStatus($cleanData);
-    } else if ($_POST['submit'] === 'delete') {
-        $dashboard->deleteUser($cleanData);
+    if(isset($_POST['userID'])) {
+        $cleanData = filter_var($_POST['userID'], FILTER_SANITIZE_NUMBER_INT);
+        if (!$cleanData) {
+            header('location: ' . HOME_URL_PREFIX . '/dashboard?error');
+        };
+        if ($_POST['submit'] === 'status') {
+            $dashboard->setStatus($cleanData);
+        } else if ($_POST['submit'] === 'delete') {
+            $dashboard->deleteUser($cleanData);
+        }
+        header("Refresh:0");
+    } elseif ($_POST['logID']) {
+        $cleanData = filter_var($_POST['logID'], FILTER_SANITIZE_NUMBER_INT);
+        if (!$cleanData) {
+            header('location: ' . HOME_URL_PREFIX . '/dashboard?error');
+        };
+        $dashboard->deleteLog($cleanData);
+        header("Refresh:0");
     }
-    header("Refresh:0");
+
 }
 ?>
 <?php if (isset($_GET['error'])) {
@@ -72,6 +83,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                                     </form>
                                     <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST">
                                         <input type="hidden" name="userID" value="<?php echo $user['id']; ?>" required>
+                                        <button type="submit" class="btn btn-emerald fw-bold shadow-none" name="submit" value="delete">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                    <?php
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <h1 class="display-4 fw-bold text-capitalize text-center text-emerald-900 mt-3">Logs</h1>
+        <div class="row mt-5">
+            <table class="table table-light table-hover">
+                <thead>
+                    <tr class="table-light text-center text-emerald-900">
+                        <th scope="col">ID</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Sub Type</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">IP</th>
+                    </tr>
+                </thead>
+                <tbody style="border-top: 2px solid #064e3b!important;">
+                    <?php
+                    if (isset($logs)) {
+                        foreach ($logs as $log) {
+                    ?>
+                            <tr class="table-light text-center" style="vertical-align: middle;">
+                                <th class="table-light"><?php echo ($log['id']); ?></th>
+                                <th class="table-light"><?php echo ($log['type']); ?></th>
+                                <td class="table-light"><?php echo ($log['subType']); ?></td>
+                                <td class="table-light"><?php echo ($log['message']); ?></td>
+                                <td class="table-light"><?php echo (date("d M Y", strtotime($log['date']))); ?></td>
+                                <td class="table-light"><?php echo ($log['ip']); ?></td>
+                                <td class="table-light">
+                                    <form action="<?php $_SERVER["PHP_SELF"] ?>" method="POST">
+                                        <input type="hidden" name="logID" value="<?php echo $log['id']; ?>" required>
                                         <button type="submit" class="btn btn-emerald fw-bold shadow-none" name="submit" value="delete">
                                             <i class="bi bi-trash-fill"></i>
                                         </button>
