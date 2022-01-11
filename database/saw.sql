@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Jan-2022 às 22:29
+-- Tempo de geração: 12-Jan-2022 às 00:27
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.12
 
@@ -109,7 +109,9 @@ CREATE TABLE `log` (
   `id` int(11) NOT NULL,
   `type` enum('Error','Log') NOT NULL,
   `subType` enum('SELECT','INSERT','UPDATE','DELETE') NOT NULL,
-  `message` longtext NOT NULL
+  `message` longtext NOT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp(),
+  `ip` varchar(144) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -305,7 +307,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `firstName`, `lastName`, `telephone`, `city`, `zipCode`, `email`, `password`, `level`, `status`, `imagePath`, `createdDate`, `state_id`, `gender_id`) VALUES
 (1, 'Sérgio', 'Félix', 916275619, 'Felgueiras', '4610-806', '8200615@estg.ipp.pt', '$2y$12$87tOTtwiU7QFBYV2pCMhtugYO1Md58emsiEXcDRULju5gTUFD4g1q', 'Admin', 'Allowed', '37350761061dc97ebe88082.62939113.jpg', '2021-12-21 16:49:48', 2, 1),
 (2, 'André', 'Pinto', 918133838, 'Santo Tirso', '4780-000', '8200613@estg.ipp.pt', '$2y$12$87tOTtwiU7QFBYV2pCMhtugYO1Md58emsiEXcDRULju5gTUFD4g1q', 'Admin', 'Allowed', '169458791161d9de3653bbf5.39946476.jpg', '2021-12-21 17:20:14', 2, 2),
-(5, 'Rui', 'Silva', 919191919, 'Maceira', '2400-100', 'ruisilva@gmail.com', '$2y$12$FbErm.d4n7.wzlU6leRsce9VQvs5X8etumzBFRV8cNyPCfCvLTti.', 'User', 'Allowed', 'default.jpg', '2022-01-10 20:48:19', 7, 1),
+(5, 'Rui', 'Silva', 919191919, 'Maceira', '2400-100', 'ruisilva@gmail.com', '$2y$12$FbErm.d4n7.wzlU6leRsce9VQvs5X8etumzBFRV8cNyPCfCvLTti.', 'User', 'Allowed', '44326659461dd91cfceeae2.85786194.jpg', '2022-01-10 20:48:19', 7, 1),
 (6, 'Manuel', 'Alegre', 964596486, 'Neiva', '4900-293', 'manuelalegre@outlook.pt', '$2y$12$nResfcRkGADAtRbdPNOeJO0naxucsD/IUU3X3qDNg4ksUhBORQ9jC', 'User', 'Allowed', 'default.jpg', '2022-01-10 21:00:09', 15, 1),
 (7, 'Joana', 'Albuquerque', 939393939, 'Sintra', '1685-464', 'joanaalbuquerque@gmail.com', '$2y$12$0JtV/dneO3iAUQ5X.oImXOd7Yzy07.BOaLrAR4MMdxAPZFuSj2MRW', 'User', 'Allowed', '190728396961dca26194ab02.15852208.jpg', '2022-01-10 21:16:27', 1, 2);
 
@@ -386,7 +388,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de tabela `attempt`
 --
 ALTER TABLE `attempt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT de tabela `category`
@@ -410,7 +412,7 @@ ALTER TABLE `gender`
 -- AUTO_INCREMENT de tabela `log`
 --
 ALTER TABLE `log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de tabela `newsletter`
